@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>tin</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta http-equiv="imagetoolbar" content="no">
+        <meta http-equiv="pragma" content="cache">
+        <meta http-equiv="cache-control" content="cache">
+        <meta http-equiv="vary" content="content-language">
+        <meta http-equiv="Cache-control" content="max-age=2592000, public">
+        <meta http-equiv="content-style-type" content="text/css">
+        <link rel="dns-prefetch" href=""/>
+        <link rel="dns-prefetch" href="//www.gstatic.com"/>
+        <link rel="dns-prefetch" href="//fonts.gstatic.com"/>
+        <link rel="dns-prefetch" href="//fonts.googleapis.com"/>
+        <link rel="dns-prefetch" href="//twemoji.maxcdn.com"/>
+        <link rel="dns-prefetch" href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400"/>
+        <link rel="stylesheet" type="text/css" href="/theme/css/screen.min.css">
+        <link rel="stylesheet" type="text/css" href="/theme/css/highlight.min.css">
+        <link rel="stylesheet" type="text/css" href="/theme/css/custom.min.css">
+        <link rel="stylesheet" type="text/css" href="/theme/css/twemoji-awesome.min.css">
+        <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400" />
+        <link rel="publisher" href="">
+        <link rel="apple-touch-startup-image" href="/theme/images/logo.png">
+        <link type="text/plain" rel="socialmedia" href="/socialmedia.txt">
+        <meta http-equiv="content-type" content="text/html;charset=utf-8">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+        <meta name="apple-mobile-web-app-capable" content="yes"/>
+        <meta name="application-name" content="tin"/>
+        <meta name="msapplication-starturl" content="http:"/>
+        <meta name="msapplication-tooltip" content=""/>
+        <meta name="msapplication-window" content="width=1024;height=768"/>
+        <meta name="msapplication-task" content="name=tin;action-uri=http:;icon-uri=/theme/images/favicon.ico"/>
+        <meta name="msapplication-TileImage" content="/theme/images/apple-touch-icon-144x144.png"/>
+        <meta name="msapplication-TileColor" content="#1F1F21"/>
+        <meta name="application-name" content="tin">
+        <meta name="HandheldFriendly" content="True">
+        <meta name="MobileOptimized" content="320"/>
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="google-site-verification" content="">
+        <meta name="alexaVerifyID" content=""/>
+        <meta name="wot-verification" content=""/>
+        <meta name="msvalidate.01" content="" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <meta name="medium" content="mult">
+        <meta name="adblock" content="disable">
+        <meta name="rating" content="General">
+        <meta name="resource-type" content="document">
+        <meta name="revisit-after" content="1 days">
+        <meta name="revisit" content="1">
+        <meta name="robots" content="index,follow">
+        <meta name="no-email-collection" content="http://www.unspam.com/noemailcollection/">
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:site" content="@">
+        <meta property="og:site_name" content="tin">
+        <meta property="og:locale" content="cn">
+        <link rel="canonical" href="/posts/2014/custom-vagrant-box.html">
+        <meta property="og:type" content="article">
+        <meta property="og:title" content="如何自定义一个使用ssh证书验证登录的VBox?">
+        <meta property="og:url" content="posts/2014/custom-vagrant-box.html">
+        <meta property="og:description" content="环境：Ubuntu-14.04.1-server-i386，Virtualbox 4.3.16，Vagrant 1.6.5，Win8.1* 如何创建自定义 ...">
+        <meta property="article:published_time" content="Friday, November 21, 2014">
+        <meta name="twitter:title" content="如何自定义一个使用ssh证书验证登录的VBox?">
+        <meta name="twitter:description" content="环境：Ubuntu-14.04.1-server-i386，Virtualbox 4.3.16，Vagrant 1.6.5，Win8.1* 如何创建自定义 ...">
+        <meta name="description" content="环境：Ubuntu-14.04.1-server-i386，Virtualbox 4.3.16，Vagrant 1.6.5，Win8.1* 如何创建自定义 ...">
+        <meta name="twitter:creator" content="@">
+        <meta property="og:image" content="/theme/images/logo.png">
+        <meta name="twitter:image" content="/theme/images/logo.png">
+        <meta property="og:image:type" content="image/png">
+        <meta property="og:image:width" content="300">
+        <meta property="og:image:height" content="300">
+        <meta property="article:section" content="Linux">
+        <meta property="article:tag" content="vagrant">
+        <meta property="article:tag" content="ubuntu">
+        <meta property="article:author" content="midtin">
+    </head>
+    <body class="post-template nav-closed" itemscope itemtype="http://schema.org/WebPage">
+        <meta itemprop="name" content="tin">
+        <meta itemprop="url" content="">
+        <meta itemprop="headline" content="tin || ">
+        <meta itemprop="description about" content="">
+        <meta itemprop="keywords" content="">
+        <meta itemprop="inLanguage" content="cn">
+<nav class="nav">
+    <h3 class="nav-title">Menu</h3>
+    <a href="#" class="nav-close">
+        <span class="hidden">Close</span>
+    </a>
+    <ul role="menubar">
+        <li class="" role="presentation"><a  href="/index.html" title="tin" itemprop="name" itemprop="significantLink">Home</a></li>
+            <li role="presentation"><a  href="/author/midtin.html" title="About me" itemprop="name" itemprop="significantLink">About me</a></li>
+            <li role="presentation"><a  href="http://python.org/" title="Python.org" itemprop="name" itemprop="significantLink">Python.org</a></li>
+            <li role="presentation"><a  href="http://jinja.pocoo.org/" title="Jinja2" itemprop="name" itemprop="significantLink">Jinja2</a></li>
+            <li class="" role="presentation"><a  href="/archives.html" title="tin | Archives" itemprop="name" itemprop="significantLink">Archives</a></li>
+    </ul>
+</nav>
+<span class="nav-cover"></span>        <div class="site-wrapper">
+            <header class="main-header post-head" style="background-image: url('/static/header-image.jpg'); background-size: 1440px; background-color: black" itemscope itemtype="http://schema.org/WPHeader">
+                <nav class="main-nav overlay clearfix">
+                    <a class="menu-button" href="#">
+                        <span class="burger">&#9776;</span>
+                        <span class="word">Menu</span>
+                    </a>
+                </nav>
+                <div class="vertical">
+                    <div class="main-header-content inner">
+                    </div>
+                </div>
+            </header>
+<main id="content" class="content" role="main">
+    <article class="post" itemscope="" itemtype="http://schema.org/BlogPosting" itemprop="blogPost">
+        <header class="post-header">
+            <h1 class="post-title" itemprop="headline">如何自定义一个使用ssh证书验证登录的VBox?</h1>
+            <section class="post-meta">
+                <time class="post-date" itemprop="datePublished" datetime="2014YYY-00M-%DD">Friday, November 21, 2014</time>
+                on <a href="tag/vagrant.html">Vagrant, </a><a href="tag/ubuntu.html">Ubuntu</a>            </section>
+        </header>
+        <section class="post-content">
+            <p>环境：Ubuntu-14.04.1-server-i386<em>，</em>Virtualbox 4.3.16<em>，</em>Vagrant 1.6.5<em>，</em>Win8.1*</p>
+<p>如何创建自定义 <strong>VBox</strong> 可参考<strong><a href="https://docs.vagrantup.com/v2/boxes/base.html">官方文档</a></strong>，本文仅叙述某些要点及笔者在过程中遇到的某些难题。</p>
+<p>另外，<strong><a href="https://docs.vagrantup.com/v2/virtualbox/boxes.html">这篇官方文章</a></strong>也是很有用处，里面提及了一些关于创建自定义开放版<strong>VBox</strong>时需要注意的地方。</p>
+<h2>配置 SSH</h2>
+<p>关于如何配置 SSH 证书登录验证的网上教程有很多，简单概括为以下几步：</p>
+<ol>
+<li>
+<p>使用 ssh-keygen 生成 private/public key 文件：</p>
+<div class="highlight"><pre><span></span>ssh-key -t rsa -C &#39;user@email.com&#39;
+</pre></div>
+
+
+</li>
+<li>
+<p>把<code>~/.ssh/id_rsa</code>移动到其它地方，以后就是使用这个key文件进行验证登录。 </p>
+</li>
+<li>
+<p>把<code>~/.ssh/id_rsa.pub</code>改名为<code>authorized_keys</code>，修改一下文件权限作为保护:</p>
+<div class="highlight"><pre><span></span>sudo chmod 400 ~/.ssh/authorized_keys
+</pre></div>
+
+
+</li>
+<li>
+<p>编辑<code>/etc/ssh/sshd_config</code>， 把<code>AuthorizedKeysFile   %h/.ssh/authorized_keys</code>一行注释去掉，在下面加上：</p>
+<div class="highlight"><pre><span></span>PasswordAuthentication no 
+PermitEmptyPasswords no
+</pre></div>
+
+
+</li>
+</ol>
+<p>重启ssh服务后就完成整个配置。</p>
+<h2>Vagrant</h2>
+<p>创建完 <strong>VBox</strong> 后，我们通过它建立自己的 <strong>Vagrant</strong> 虚拟机，</p>
+<p>在主机的你希望建立 <strong>Vagrant</strong> 虚拟机的目录，Shell 中输入：</p>
+<div class="highlight"><pre><span></span>vagrant box add boxsname your_boxs_path<span class="se">\y</span>ourbox.box
+vagrant init boxsname
+vagrant up
+..
+</pre></div>
+
+
+<p>注意，由于我们使用的是 SSH 证书登录验证，我们<code>vagrant up</code>之前需要在刚生成的<code>Vagrantfile</code>中加入以下设置：</p>
+<div class="highlight"><pre><span></span># vagrant把VirtualBox的端口转发规则改为主机端口2222-&gt;虚拟机端口22，所以这里填2222
+config.ssh.port = 2222
+
+# 配置ssh登录使用的用户名
+config.ssh.username = &#39;linuxs_user_name&#39;
+
+# 配置private_key文件
+config.private_key_path = &#39;your_private_key_path&#39;
+</pre></div>
+
+
+<h4>Vagrant up</h4>
+<p>在<code>vagrant up</code>生成虚拟机的过程中我们有可能遇到以下几个错误提示：</p>
+<ol>
+<li>
+<p><code>default: Warning: Connection refused. Retrying...</code></p>
+<p>原因：一般是没配置好 SSH 导致验证登录失败</p>
+<p>解决办法：根据上面配置<code>Vagrantfile</code>可解决</p>
+</li>
+<li>
+<p><code>sudo: no tty present and no askpass program specified</code></p>
+<p>原因：<strong>Vagrant</strong> 在配置虚拟机时需要使用sudo，而一般的用户使用sudo需要输入密码，导致此错误的发生</p>
+<p>解决办法：修改<code>/etc/sudoers</code>的配置</p>
+<div class="highlight"><pre><span></span><span class="c1"># 切换到root用户</span>
+su -
+
+<span class="c1"># 为/etc/sudoers增加写入权限</span>
+chmod <span class="m">600</span> /etc/sudoers
+
+<span class="c1"># 编辑/etc/sudoers</span>
+vim /etc/sudoers
+
+------------------------------------------------------------
+
+:::linenums<span class="o">=</span>True
+<span class="c1"># 在 /etc/sudoers中加入以下几行</span>
+yourusername        <span class="nv">ALL</span><span class="o">=</span> <span class="o">(</span>ALL<span class="o">)</span> NOPASSWD:ALL
+Defaults:yourusername   !requiretty
+
+<span class="c1">#修改%sudo...</span>
+%sudo       <span class="nv">ALL</span><span class="o">=(</span>ALL<span class="o">)</span> NOPASSWD:ALL
+</pre></div>
+
+
+</li>
+<li>
+<p><code>/sbin/mount.vboxsf: mounting failed with the error: No such device</code></p>
+<p>原因：在创建<strong>VBox</strong>时Linux中需要安装guest-additions，若在安装完后Linux-kernel进行了更新，则会导致此错误的发生。据观测，即使更新了<strong>Vagrant</strong>虚拟机的guest-addtions，在下一次启动时也有可能出现这个问题。</p>
+<p>解决办法：安装第三方插件<a href="https://github.com/dotless-de/vagrant-vbguest">vagrant-vbguest</a>，该插件会自动探查guest-additions的版本是否合适，若不适合则会自动进行guest-additions更新，十分方便。</p>
+</li>
+</ol>
+        </section>
+        <footer class="post-footer">
+            <figure class="author-image">
+                <a class="img" href="author/midtin.html" style="background-image: url('/static/avatar.jpg')"><span class="hidden">midtin's Picture</span></a>
+            </figure>
+            <section class="author">
+                <h4>
+                    <a href="author/midtin.html">midtin</a>
+                </h4>
+                <p>人生苦短，_______</p>
+                <div class="author-meta">
+                    <span class="author-location icon-location">GuangZhou</span>                 </div>
+            </section>
+            <section class="share">
+                <h4>Share this post</h4>
+                <a class="icon-twitter" href="https://twitter.com/share?text=%E5%A6%82%E4%BD%95%E8%87%AA%E5%AE%9A%E4%B9%89%E4%B8%80%E4 ...%20via%20%40&amp;url=/posts/2014/custom-vagrant-box.html" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <span class="hidden">Twitter</span>
+                </a>
+                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=/posts/2014/custom-vagrant-box.html" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <span class="hidden">Facebook</span>
+                </a>
+                <a class="icon-google-plus" href="https://plus.google.com/share?url=/posts/2014/custom-vagrant-box.html" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <span class="hidden">Google+</span>
+                </a>
+            </section>
+        </footer>
+    </article>
+</main>
+<aside class="read-next">
+    <!-- a class="read-next-story prev" style="background-image: url('')" href="/posts/2014/ubuntu-python-vim.html" -->
+    <a class="read-next-story prev" href="/posts/2014/ubuntu-python-vim.html">
+        <section class="post">
+            <h2>Ubuntu Python环境+Vim配置 注意事项</h2>
+            <p><p>以前曾经尝试使用CentOS，不过感觉<code>YUM</code>没<code>APT</code>好用，于是选择了Ubuntu作为重新学习Linux的操作系统，毕竟Ubuntu在内地的受支持度还是很高的，至少没被qiang→_→</p>
+<h2></h2>
+<div class="highlight"><pre><span></span>虚拟机：VMware Workstation 9
+
+系统 ...</pre></div></p>
+        </section>
+    </a>
+</aside>             <footer class="site-footer clearfix" role="contentinfo" itemscope itemtype="http://schema.org/WPFooter">
+                <section class="copyright">
+                    <a itemprop="url" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">
+                        CC Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
+                </section>
+                <section class="poweredby">
+                    Proudly published with
+                    <a itemprop="url" href="https://getpelican.org" target="_blank">Pelican</a>
+                </section>
+            </footer>
+        </div>
+    <script type="text/javascript" src="/theme/js/jquery-1.11.2.min.js"></script>
+    <script type="text/javascript" src="/theme/js/jquery.fitvids.min.js"></script>
+    <script type="text/javascript" src="/theme/js/index.min.js"></script>
+    </body>
+</html>

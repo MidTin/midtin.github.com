@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>tin</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta http-equiv="imagetoolbar" content="no">
+        <meta http-equiv="pragma" content="cache">
+        <meta http-equiv="cache-control" content="cache">
+        <meta http-equiv="vary" content="content-language">
+        <meta http-equiv="Cache-control" content="max-age=2592000, public">
+        <meta http-equiv="content-style-type" content="text/css">
+        <link rel="dns-prefetch" href=""/>
+        <link rel="dns-prefetch" href="//www.gstatic.com"/>
+        <link rel="dns-prefetch" href="//fonts.gstatic.com"/>
+        <link rel="dns-prefetch" href="//fonts.googleapis.com"/>
+        <link rel="dns-prefetch" href="//twemoji.maxcdn.com"/>
+        <link rel="dns-prefetch" href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400"/>
+        <link rel="stylesheet" type="text/css" href="/theme/css/screen.min.css">
+        <link rel="stylesheet" type="text/css" href="/theme/css/highlight.min.css">
+        <link rel="stylesheet" type="text/css" href="/theme/css/custom.min.css">
+        <link rel="stylesheet" type="text/css" href="/theme/css/twemoji-awesome.min.css">
+        <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400" />
+        <link rel="publisher" href="">
+        <link rel="apple-touch-startup-image" href="/theme/images/logo.png">
+        <link type="text/plain" rel="socialmedia" href="/socialmedia.txt">
+        <meta http-equiv="content-type" content="text/html;charset=utf-8">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+        <meta name="apple-mobile-web-app-capable" content="yes"/>
+        <meta name="application-name" content="tin"/>
+        <meta name="msapplication-starturl" content="http:"/>
+        <meta name="msapplication-tooltip" content=""/>
+        <meta name="msapplication-window" content="width=1024;height=768"/>
+        <meta name="msapplication-task" content="name=tin;action-uri=http:;icon-uri=/theme/images/favicon.ico"/>
+        <meta name="msapplication-TileImage" content="/theme/images/apple-touch-icon-144x144.png"/>
+        <meta name="msapplication-TileColor" content="#1F1F21"/>
+        <meta name="application-name" content="tin">
+        <meta name="HandheldFriendly" content="True">
+        <meta name="MobileOptimized" content="320"/>
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="google-site-verification" content="">
+        <meta name="alexaVerifyID" content=""/>
+        <meta name="wot-verification" content=""/>
+        <meta name="msvalidate.01" content="" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <meta name="medium" content="mult">
+        <meta name="adblock" content="disable">
+        <meta name="rating" content="General">
+        <meta name="resource-type" content="document">
+        <meta name="revisit-after" content="1 days">
+        <meta name="revisit" content="1">
+        <meta name="robots" content="index,follow">
+        <meta name="no-email-collection" content="http://www.unspam.com/noemailcollection/">
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:site" content="@">
+        <meta property="og:site_name" content="tin">
+        <meta property="og:locale" content="cn">
+        <link rel="canonical" href="/posts/2014/centos-upgrade-git.html">
+        <meta property="og:type" content="article">
+        <meta property="og:title" content="CentOS 升级 Git">
+        <meta property="og:url" content="posts/2014/centos-upgrade-git.html">
+        <meta property="og:description" content="现在Git的版本已经是1.7.12了，但CentOS-6.5的Git版本却是1.7.1，而用yum安装的Git的最高版本也只有1.7.1。那么我们该如何升级我们的Git呢？以CentOS-6.5为例： 安装RPMForge源 RPMForge源是什么 ...">
+        <meta property="article:published_time" content="Thursday, May 15, 2014">
+        <meta name="twitter:title" content="CentOS 升级 Git">
+        <meta name="twitter:description" content="现在Git的版本已经是1.7.12了，但CentOS-6.5的Git版本却是1.7.1，而用yum安装的Git的最高版本也只有1.7.1。那么我们该如何升级我们的Git呢？以CentOS-6.5为例： 安装RPMForge源 RPMForge源是什么 ...">
+        <meta name="description" content="现在Git的版本已经是1.7.12了，但CentOS-6.5的Git版本却是1.7.1，而用yum安装的Git的最高版本也只有1.7.1。那么我们该如何升级我们的Git呢？以CentOS-6.5为例： 安装RPMForge源 RPMForge源是什么 ...">
+        <meta name="twitter:creator" content="@">
+        <meta property="og:image" content="/theme/images/logo.png">
+        <meta name="twitter:image" content="/theme/images/logo.png">
+        <meta property="og:image:type" content="image/png">
+        <meta property="og:image:width" content="300">
+        <meta property="og:image:height" content="300">
+        <meta property="article:section" content="Linux">
+        <meta property="article:tag" content="Linux">
+        <meta property="article:tag" content="CentOS">
+        <meta property="article:author" content="midtin">
+    </head>
+    <body class="post-template nav-closed" itemscope itemtype="http://schema.org/WebPage">
+        <meta itemprop="name" content="tin">
+        <meta itemprop="url" content="">
+        <meta itemprop="headline" content="tin || ">
+        <meta itemprop="description about" content="">
+        <meta itemprop="keywords" content="">
+        <meta itemprop="inLanguage" content="cn">
+<nav class="nav">
+    <h3 class="nav-title">Menu</h3>
+    <a href="#" class="nav-close">
+        <span class="hidden">Close</span>
+    </a>
+    <ul role="menubar">
+        <li class="" role="presentation"><a  href="/index.html" title="tin" itemprop="name" itemprop="significantLink">Home</a></li>
+            <li role="presentation"><a  href="/author/midtin.html" title="About me" itemprop="name" itemprop="significantLink">About me</a></li>
+            <li role="presentation"><a  href="http://python.org/" title="Python.org" itemprop="name" itemprop="significantLink">Python.org</a></li>
+            <li role="presentation"><a  href="http://jinja.pocoo.org/" title="Jinja2" itemprop="name" itemprop="significantLink">Jinja2</a></li>
+            <li class="" role="presentation"><a  href="/archives.html" title="tin | Archives" itemprop="name" itemprop="significantLink">Archives</a></li>
+    </ul>
+</nav>
+<span class="nav-cover"></span>        <div class="site-wrapper">
+            <header class="main-header post-head" style="background-image: url('/static/header-image.jpg'); background-size: 1440px; background-color: black" itemscope itemtype="http://schema.org/WPHeader">
+                <nav class="main-nav overlay clearfix">
+                    <a class="menu-button" href="#">
+                        <span class="burger">&#9776;</span>
+                        <span class="word">Menu</span>
+                    </a>
+                </nav>
+                <div class="vertical">
+                    <div class="main-header-content inner">
+                    </div>
+                </div>
+            </header>
+<main id="content" class="content" role="main">
+    <article class="post" itemscope="" itemtype="http://schema.org/BlogPosting" itemprop="blogPost">
+        <header class="post-header">
+            <h1 class="post-title" itemprop="headline">CentOS 升级 Git</h1>
+            <section class="post-meta">
+                <time class="post-date" itemprop="datePublished" datetime="2014YYY-00M-%DD">Thursday, May 15, 2014</time>
+                on <a href="tag/linux.html">Linux, </a><a href="tag/centos.html">Centos</a>            </section>
+        </header>
+        <section class="post-content">
+            <p>现在Git的版本已经是1.7.12了，但CentOS-6.5的Git版本却是1.7.1，而用yum安装的Git的最高版本也只有1.7.1。那么我们该如何升级我们的Git呢？以CentOS-6.5为例：</p>
+<h1>安装RPMForge源</h1>
+<blockquote>
+<h5><em>RPMForge源是什么？</em></h5>
+<p>RPMForge是CentOS系统下的软件仓库，拥有4000多种的软件包，被CentOS社区认为是最安全也是最稳定的一个软件仓库。</p>
+<p>RPMForge地址：http://rpmfusion.org</p>
+</blockquote>
+<p>首先，使用rpm远程安装需要的证书</p>
+<p><code># rpm --import http://apt.sw.be/RPM-GPG-KEY.dag.txt</code></p>
+<p>之后，到<a href="http://pkgs.repoforge.org/rpmforge-release/">RPMForge的http://pkgs.repoforge.org/rpmforge-release/</a>选择适合自己系统的rpm安装包</p>
+<p><code>#  rpm -i http://pkgs.repoforge.org/rpmforge-release/rpmforge-release-0.5.3-1.el6.rf.i686.rpm</code></p>
+<p>更新rpmforge-extra源</p>
+<p><code># yum --enablerepo=rpmforge-extras update</code></p>
+<h1>升级Git</h1>
+<p>查看yum库可用的git软件包</p>
+<p><code># yum --enablerepo=rpmforge-extras provides git</code></p>
+<p>选择适合的Git版本安装</p>
+<p><code># yum --enablerepo=rpmforge-extras install gitk-1.7.12.4-1.el6.rfx.i686.rpm</code></p>
+<p>检查Git版本</p>
+<p><code># git --version</code></p>
+        </section>
+        <footer class="post-footer">
+            <figure class="author-image">
+                <a class="img" href="author/midtin.html" style="background-image: url('/static/avatar.jpg')"><span class="hidden">midtin's Picture</span></a>
+            </figure>
+            <section class="author">
+                <h4>
+                    <a href="author/midtin.html">midtin</a>
+                </h4>
+                <p>人生苦短，_______</p>
+                <div class="author-meta">
+                    <span class="author-location icon-location">GuangZhou</span>                 </div>
+            </section>
+            <section class="share">
+                <h4>Share this post</h4>
+                <a class="icon-twitter" href="https://twitter.com/share?text=CentOS%20%E5%8D%87%E7%BA%A7%20Git%20via%20%40&amp;url=/posts/2014/centos-upgrade-git.html" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <span class="hidden">Twitter</span>
+                </a>
+                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=/posts/2014/centos-upgrade-git.html" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <span class="hidden">Facebook</span>
+                </a>
+                <a class="icon-google-plus" href="https://plus.google.com/share?url=/posts/2014/centos-upgrade-git.html" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <span class="hidden">Google+</span>
+                </a>
+            </section>
+        </footer>
+    </article>
+</main>
+<aside class="read-next">
+    <!-- a class="read-next-story" style="background-image: url('')" href="/posts/2014/character-encoding.html" -->
+    <a class="read-next-story" href="/posts/2014/character-encoding.html">
+        <section class="post">
+            <h2>字符编码</h2>
+            <p><p>ARTICLE_URL = 'posts/{date:%Y}/'
+字符串是一种数据类型，但是，字符串比较特殊的是还有一个编码问题。</p>
+<p>因为计算机只能处理数字，如果要处理文本，就必须先把文本转换为数字才能处理。最早的计算机在设计时采用8个比特（bit）作为一个字节（byte），所以 ...</p></p>
+        </section>
+    </a>
+    <!-- a class="read-next-story prev" style="background-image: url('')" href="/posts/2014/reading-note.html" -->
+    <a class="read-next-story prev" href="/posts/2014/reading-note.html">
+        <section class="post">
+            <h2>模块性：保持清晰，保持简洁</h2>
+            <p><h2>Modularity:Keeping It Clean,Keeping It Simple</h2>
+<p><em>部分摘录</em></p>
+<ul>
+<li>
+<p>模块化代码的首要特质就是封装。封装良好的模块<strong>不会过多向外部披露自身的细节，不会调用其它模块的实现码，也不会胡乱共享全局数据</strong></p>
+</li>
+<li>
+<p>200到400之间逻辑行的代码是“最佳点 ...</p></li></ul></p>
+        </section>
+    </a>
+</aside>             <footer class="site-footer clearfix" role="contentinfo" itemscope itemtype="http://schema.org/WPFooter">
+                <section class="copyright">
+                    <a itemprop="url" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">
+                        CC Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
+                </section>
+                <section class="poweredby">
+                    Proudly published with
+                    <a itemprop="url" href="https://getpelican.org" target="_blank">Pelican</a>
+                </section>
+            </footer>
+        </div>
+    <script type="text/javascript" src="/theme/js/jquery-1.11.2.min.js"></script>
+    <script type="text/javascript" src="/theme/js/jquery.fitvids.min.js"></script>
+    <script type="text/javascript" src="/theme/js/index.min.js"></script>
+    </body>
+</html>

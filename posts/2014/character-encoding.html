@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>tin</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta http-equiv="imagetoolbar" content="no">
+        <meta http-equiv="pragma" content="cache">
+        <meta http-equiv="cache-control" content="cache">
+        <meta http-equiv="vary" content="content-language">
+        <meta http-equiv="Cache-control" content="max-age=2592000, public">
+        <meta http-equiv="content-style-type" content="text/css">
+        <link rel="dns-prefetch" href=""/>
+        <link rel="dns-prefetch" href="//www.gstatic.com"/>
+        <link rel="dns-prefetch" href="//fonts.gstatic.com"/>
+        <link rel="dns-prefetch" href="//fonts.googleapis.com"/>
+        <link rel="dns-prefetch" href="//twemoji.maxcdn.com"/>
+        <link rel="dns-prefetch" href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400"/>
+        <link rel="stylesheet" type="text/css" href="/theme/css/screen.min.css">
+        <link rel="stylesheet" type="text/css" href="/theme/css/highlight.min.css">
+        <link rel="stylesheet" type="text/css" href="/theme/css/custom.min.css">
+        <link rel="stylesheet" type="text/css" href="/theme/css/twemoji-awesome.min.css">
+        <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400" />
+        <link rel="publisher" href="">
+        <link rel="apple-touch-startup-image" href="/theme/images/logo.png">
+        <link type="text/plain" rel="socialmedia" href="/socialmedia.txt">
+        <meta http-equiv="content-type" content="text/html;charset=utf-8">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+        <meta name="apple-mobile-web-app-capable" content="yes"/>
+        <meta name="application-name" content="tin"/>
+        <meta name="msapplication-starturl" content="http:"/>
+        <meta name="msapplication-tooltip" content=""/>
+        <meta name="msapplication-window" content="width=1024;height=768"/>
+        <meta name="msapplication-task" content="name=tin;action-uri=http:;icon-uri=/theme/images/favicon.ico"/>
+        <meta name="msapplication-TileImage" content="/theme/images/apple-touch-icon-144x144.png"/>
+        <meta name="msapplication-TileColor" content="#1F1F21"/>
+        <meta name="application-name" content="tin">
+        <meta name="HandheldFriendly" content="True">
+        <meta name="MobileOptimized" content="320"/>
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="google-site-verification" content="">
+        <meta name="alexaVerifyID" content=""/>
+        <meta name="wot-verification" content=""/>
+        <meta name="msvalidate.01" content="" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <meta name="medium" content="mult">
+        <meta name="adblock" content="disable">
+        <meta name="rating" content="General">
+        <meta name="resource-type" content="document">
+        <meta name="revisit-after" content="1 days">
+        <meta name="revisit" content="1">
+        <meta name="robots" content="index,follow">
+        <meta name="no-email-collection" content="http://www.unspam.com/noemailcollection/">
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:site" content="@">
+        <meta property="og:site_name" content="tin">
+        <meta property="og:locale" content="cn">
+        <link rel="canonical" href="/posts/2014/character-encoding.html">
+        <meta property="og:type" content="article">
+        <meta property="og:title" content="字符编码">
+        <meta property="og:url" content="posts/2014/character-encoding.html">
+        <meta property="og:description" content="ARTICLE_URL = &#39;posts/{date:%Y}/&#39; 字符串是一种数据类型，但是，字符串比较特殊的是还有一个编码问题。 因为计算机只能处理数字，如果要处理文本，就必须先把文本转换为数字才能处理。最早的计算机在设计时采用8个比特（bit）作为一个字节（byte），所以 ...">
+        <meta property="article:published_time" content="Tuesday, May 20, 2014">
+        <meta name="twitter:title" content="字符编码">
+        <meta name="twitter:description" content="ARTICLE_URL = &#39;posts/{date:%Y}/&#39; 字符串是一种数据类型，但是，字符串比较特殊的是还有一个编码问题。 因为计算机只能处理数字，如果要处理文本，就必须先把文本转换为数字才能处理。最早的计算机在设计时采用8个比特（bit）作为一个字节（byte），所以 ...">
+        <meta name="description" content="ARTICLE_URL = &#39;posts/{date:%Y}/&#39; 字符串是一种数据类型，但是，字符串比较特殊的是还有一个编码问题。 因为计算机只能处理数字，如果要处理文本，就必须先把文本转换为数字才能处理。最早的计算机在设计时采用8个比特（bit）作为一个字节（byte），所以 ...">
+        <meta name="twitter:creator" content="@">
+        <meta property="og:image" content="/theme/images/logo.png">
+        <meta name="twitter:image" content="/theme/images/logo.png">
+        <meta property="og:image:type" content="image/png">
+        <meta property="og:image:width" content="300">
+        <meta property="og:image:height" content="300">
+        <meta property="article:section" content="Forwarding">
+        <meta property="article:tag" content="encode">
+        <meta property="article:author" content="midtin">
+    </head>
+    <body class="post-template nav-closed" itemscope itemtype="http://schema.org/WebPage">
+        <meta itemprop="name" content="tin">
+        <meta itemprop="url" content="">
+        <meta itemprop="headline" content="tin || ">
+        <meta itemprop="description about" content="">
+        <meta itemprop="keywords" content="">
+        <meta itemprop="inLanguage" content="cn">
+<nav class="nav">
+    <h3 class="nav-title">Menu</h3>
+    <a href="#" class="nav-close">
+        <span class="hidden">Close</span>
+    </a>
+    <ul role="menubar">
+        <li class="" role="presentation"><a  href="/index.html" title="tin" itemprop="name" itemprop="significantLink">Home</a></li>
+            <li role="presentation"><a  href="/author/midtin.html" title="About me" itemprop="name" itemprop="significantLink">About me</a></li>
+            <li role="presentation"><a  href="http://python.org/" title="Python.org" itemprop="name" itemprop="significantLink">Python.org</a></li>
+            <li role="presentation"><a  href="http://jinja.pocoo.org/" title="Jinja2" itemprop="name" itemprop="significantLink">Jinja2</a></li>
+            <li class="" role="presentation"><a  href="/archives.html" title="tin | Archives" itemprop="name" itemprop="significantLink">Archives</a></li>
+    </ul>
+</nav>
+<span class="nav-cover"></span>        <div class="site-wrapper">
+            <header class="main-header post-head" style="background-image: url('/static/header-image.jpg'); background-size: 1440px; background-color: black" itemscope itemtype="http://schema.org/WPHeader">
+                <nav class="main-nav overlay clearfix">
+                    <a class="menu-button" href="#">
+                        <span class="burger">&#9776;</span>
+                        <span class="word">Menu</span>
+                    </a>
+                </nav>
+                <div class="vertical">
+                    <div class="main-header-content inner">
+                    </div>
+                </div>
+            </header>
+<main id="content" class="content" role="main">
+    <article class="post" itemscope="" itemtype="http://schema.org/BlogPosting" itemprop="blogPost">
+        <header class="post-header">
+            <h1 class="post-title" itemprop="headline">字符编码</h1>
+            <section class="post-meta">
+                <time class="post-date" itemprop="datePublished" datetime="2014YYY-00M-%DD">Tuesday, May 20, 2014</time>
+                on <a href="tag/encode.html">Encode</a>            </section>
+        </header>
+        <section class="post-content">
+            <p>ARTICLE_URL = 'posts/{date:%Y}/'
+字符串是一种数据类型，但是，字符串比较特殊的是还有一个编码问题。</p>
+<p>因为计算机只能处理数字，如果要处理文本，就必须先把文本转换为数字才能处理。最早的计算机在设计时采用8个比特（bit）作为一个字节（byte），所以，一个字节能表示的最大的整数就是255（二进制11111111=十进制255），如果要表示更大的整数，就必须用更多的字节。比如两个字节可以表示的最大整数是<code>65535</code>，4个字节可以表示的最大整数是<code>4294967295</code>。</p>
+<p>由于计算机是美国人发明的，因此，最早只有127个字母被编码到计算机里，也就是大小写英文字母、数字和一些符号，这个编码表被称为<code>ASCII</code>编码，比如大写字母<code>A</code>的编码是<code>65</code>，小写字母<code>z</code>的编码是<code>122</code>。</p>
+<p>但是要处理中文显然一个字节是不够的，至少需要两个字节，而且还不能和<code>ASCII</code>编码冲突，所以，中国制定了<code>GB2312</code>编码，用来把中文编进去。</p>
+<p>你可以想得到的是，全世界有上百种语言，日本把日文编到<code>Shift_JIS</code>里，韩国把韩文编到<code>Euc-kr</code>里，各国有各国的标准，就会不可避免地出现冲突，结果就是，在多语言混合的文本中，显示出来会有乱码。</p>
+<p><img alt="char-encoding-problem!" src="http://www.liaoxuefeng.com/files/attachments/0013872491802084161ec9ef7d143a897e1584819535656000/0" /></p>
+<p>因此，Unicode应运而生。Unicode把所有语言都统一到一套编码里，这样就不会再有乱码问题了。</p>
+<p>Unicode标准也在不断发展，但最常用的是用两个字节表示一个字符（如果要用到非常偏僻的字符，就需要4个字节）。现代操作系统和大多数编程语言都直接支持Unicode。</p>
+<p>现在，捋一捋ASCII编码和Unicode编码的区别：ASCII编码是1个字节，而Unicode编码通常是2个字节。</p>
+<p>字母<code>A</code>用ASCII编码是十进制的<code>65</code>，二进制的<code>01000001</code>；</p>
+<p>字符<code>0</code>用ASCII编码是十进制的<code>48</code>，二进制的<code>00110000</code>，注意字符<code>'0'</code>和整数<code>0</code>是不同的；</p>
+<p>汉字<code>中</code>已经超出了ASCII编码的范围，用Unicode编码是十进制的<code>20013</code>，二进制的<code>01001110 00101101</code>。</p>
+<p>你可以猜测，如果把ASCII编码的<code>A</code>用Unicode编码，只需要在前面补0就可以，因此，<code>A</code>的Unicode编码是<code>00000000 01000001</code>。</p>
+<p>新的问题又出现了：如果统一成Unicode编码，乱码问题从此消失了。但是，如果你写的文本基本上全部是英文的话，用Unicode编码比ASCII编码需要多一倍的存储空间，在存储和传输上就十分不划算。</p>
+<p>所以，本着节约的精神，又出现了把Unicode编码转化为“可变长编码”的UTF-8编码。UTF-8编码把一个Unicode字符根据不同的数字大小编码成1-6个字节，常用的英文字母被编码成1个字节，汉字通常是3个字节，只有很生僻的字符才会被编码成4-6个字节。如果你要传输的文本包含大量英文字符，用UTF-8编码就能节省空间：</p>
+<table>
+<thead>
+<tr>
+<th>字符</th>
+<th>ASCII</th>
+<th>Unicode</th>
+<th>UTF-8</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A</td>
+<td>01000001</td>
+<td>00000000 01000001</td>
+<td>01000001</td>
+</tr>
+<tr>
+<td>中</td>
+<td>x</td>
+<td>01001110 00101101</td>
+<td>11100100 10111000 10101101</td>
+</tr>
+</tbody>
+</table>
+<p>从上面的表格还可以发现，UTF-8编码有一个额外的好处，就是ASCII编码实际上可以被看成是UTF-8编码的一部分，所以，大量只支持ASCII编码的历史遗留软件可以在UTF-8编码下继续工作。</p>
+<p>搞清楚了ASCII、Unicode和UTF-8的关系，我们就可以总结一下现在计算机系统通用的字符编码工作方式：</p>
+<p>在计算机内存中，统一使用Unicode编码，当需要保存到硬盘或者需要传输的时候，就转换为UTF-8编码。</p>
+<p>用记事本编辑的时候，从文件读取的UTF-8字符被转换为Unicode字符到内存里，编辑完成后，保存的时候再把Unicode转换为UTF-8保存到文件：</p>
+<p><img alt="rw-file-utf-8" src="http://www.liaoxuefeng.com/files/attachments/001387245992536e2ba28125cf04f5c8985dbc94a02245e000/0" /></p>
+<p>浏览网页的时候，服务器会把动态生成的Unicode内容转换为UTF-8再传输到浏览器：</p>
+<p><img alt="web-utf-8" src="http://www.liaoxuefeng.com/files/attachments/001387245979827634fd6204f9346a1ae6358d9ed051666000/0" /></p>
+<p>所以你看到很多网页的源码上会有类似<code>&lt;meta charset="UTF-8" /&gt;</code>的信息，表示该网页正是用的UTF-8编码。</p>
+<p>&lt; 转自 <a href="http://www.liaoxuefeng.com/wiki/001374738125095c955c1e6d8bb493182103fac9270762a000/001386819196283586a37629844456ca7e5a7faa9b94ee8000">廖雪峰Python教程</a>&gt;</p>
+        </section>
+        <footer class="post-footer">
+            <figure class="author-image">
+                <a class="img" href="author/midtin.html" style="background-image: url('/static/avatar.jpg')"><span class="hidden">midtin's Picture</span></a>
+            </figure>
+            <section class="author">
+                <h4>
+                    <a href="author/midtin.html">midtin</a>
+                </h4>
+                <p>人生苦短，_______</p>
+                <div class="author-meta">
+                    <span class="author-location icon-location">GuangZhou</span>                 </div>
+            </section>
+            <section class="share">
+                <h4>Share this post</h4>
+                <a class="icon-twitter" href="https://twitter.com/share?text=%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81%20via%20%40&amp;url=/posts/2014/character-encoding.html" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <span class="hidden">Twitter</span>
+                </a>
+                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=/posts/2014/character-encoding.html" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <span class="hidden">Facebook</span>
+                </a>
+                <a class="icon-google-plus" href="https://plus.google.com/share?url=/posts/2014/character-encoding.html" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <span class="hidden">Google+</span>
+                </a>
+            </section>
+        </footer>
+    </article>
+</main>
+<aside class="read-next">
+    <!-- a class="read-next-story" style="background-image: url('')" href="/posts/2014/ubuntu-python-vim.html" -->
+    <a class="read-next-story" href="/posts/2014/ubuntu-python-vim.html">
+        <section class="post">
+            <h2>Ubuntu Python环境+Vim配置 注意事项</h2>
+            <p><p>以前曾经尝试使用CentOS，不过感觉<code>YUM</code>没<code>APT</code>好用，于是选择了Ubuntu作为重新学习Linux的操作系统，毕竟Ubuntu在内地的受支持度还是很高的，至少没被qiang→_→</p>
+<h2></h2>
+<div class="highlight"><pre><span></span>虚拟机：VMware Workstation 9
+
+系统 ...</pre></div></p>
+        </section>
+    </a>
+    <!-- a class="read-next-story prev" style="background-image: url('')" href="/posts/2014/centos-upgrade-git.html" -->
+    <a class="read-next-story prev" href="/posts/2014/centos-upgrade-git.html">
+        <section class="post">
+            <h2>CentOS 升级 Git</h2>
+            <p><p>现在Git的版本已经是1.7.12了，但CentOS-6.5的Git版本却是1.7.1，而用yum安装的Git的最高版本也只有1.7.1。那么我们该如何升级我们的Git呢？以CentOS-6.5为例：</p>
+<h1>安装RPMForge源</h1>
+<blockquote>
+<h5><em>RPMForge源是什么 ...</em></h5></blockquote></p>
+        </section>
+    </a>
+</aside>             <footer class="site-footer clearfix" role="contentinfo" itemscope itemtype="http://schema.org/WPFooter">
+                <section class="copyright">
+                    <a itemprop="url" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">
+                        CC Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
+                </section>
+                <section class="poweredby">
+                    Proudly published with
+                    <a itemprop="url" href="https://getpelican.org" target="_blank">Pelican</a>
+                </section>
+            </footer>
+        </div>
+    <script type="text/javascript" src="/theme/js/jquery-1.11.2.min.js"></script>
+    <script type="text/javascript" src="/theme/js/jquery.fitvids.min.js"></script>
+    <script type="text/javascript" src="/theme/js/index.min.js"></script>
+    </body>
+</html>
