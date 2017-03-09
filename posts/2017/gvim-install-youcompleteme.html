@@ -56,25 +56,24 @@
         <meta name="twitter:site" content="@">
         <meta property="og:site_name" content="tin">
         <meta property="og:locale" content="cn">
-        <link rel="canonical" href="/posts/2014/ubuntu-python-vim.html">
+        <link rel="canonical" href="/posts/2017/gvim-install-youcompleteme.html">
         <meta property="og:type" content="article">
-        <meta property="og:title" content="Ubuntu Python环境+Vim配置 注意事项">
-        <meta property="og:url" content="posts/2014/ubuntu-python-vim.html">
-        <meta property="og:description" content="以前曾经尝试使用CentOS，不过感觉YUM没APT好用，于是选择了Ubuntu作为重新学习Linux的操作系统，毕竟Ubuntu在内地的受支持度还是很高的，至少没被qiang→_→ 虚拟机：VMware Workstation 9 系统 ...">
-        <meta property="article:published_time" content="Wednesday, September 03, 2014">
-        <meta name="twitter:title" content="Ubuntu Python环境+Vim配置 注意事项">
-        <meta name="twitter:description" content="以前曾经尝试使用CentOS，不过感觉YUM没APT好用，于是选择了Ubuntu作为重新学习Linux的操作系统，毕竟Ubuntu在内地的受支持度还是很高的，至少没被qiang→_→ 虚拟机：VMware Workstation 9 系统 ...">
-        <meta name="description" content="以前曾经尝试使用CentOS，不过感觉YUM没APT好用，于是选择了Ubuntu作为重新学习Linux的操作系统，毕竟Ubuntu在内地的受支持度还是很高的，至少没被qiang→_→ 虚拟机：VMware Workstation 9 系统 ...">
+        <meta property="og:title" content="GVIM 安装 YouCompleteMe">
+        <meta property="og:url" content="posts/2017/gvim-install-youcompleteme.html">
+        <meta property="og:description" content="YouCompleteMe 是一款功能强大且性能优秀的 VIM 代码补全插件。它支持绝大部分编程语言的代码补全，同时支持代码搜索跳转，使用 VIM 编程的都离不开它。 然而，由于它功能强大，使它的安装没那么轻松。由于在 Linux 环境下安装 ...">
+        <meta property="article:published_time" content="Friday, March 10, 2017">
+        <meta name="twitter:title" content="GVIM 安装 YouCompleteMe">
+        <meta name="twitter:description" content="YouCompleteMe 是一款功能强大且性能优秀的 VIM 代码补全插件。它支持绝大部分编程语言的代码补全，同时支持代码搜索跳转，使用 VIM 编程的都离不开它。 然而，由于它功能强大，使它的安装没那么轻松。由于在 Linux 环境下安装 ...">
+        <meta name="description" content="YouCompleteMe 是一款功能强大且性能优秀的 VIM 代码补全插件。它支持绝大部分编程语言的代码补全，同时支持代码搜索跳转，使用 VIM 编程的都离不开它。 然而，由于它功能强大，使它的安装没那么轻松。由于在 Linux 环境下安装 ...">
         <meta name="twitter:creator" content="@">
         <meta property="og:image" content="/theme/images/logo.png">
         <meta name="twitter:image" content="/theme/images/logo.png">
         <meta property="og:image:type" content="image/png">
         <meta property="og:image:width" content="300">
         <meta property="og:image:height" content="300">
-        <meta property="article:section" content="Linux">
-        <meta property="article:tag" content="python">
+        <meta property="article:section" content="misc">
         <meta property="article:tag" content="vim">
-        <meta property="article:tag" content="ubuntu">
+        <meta property="article:tag" content="gvim">
         <meta property="article:author" content="midtin">
     </head>
     <body class="post-template nav-closed" itemscope itemtype="http://schema.org/WebPage">
@@ -113,60 +112,56 @@
 <main id="content" class="content" role="main">
     <article class="post" itemscope="" itemtype="http://schema.org/BlogPosting" itemprop="blogPost">
         <header class="post-header">
-            <h1 class="post-title" itemprop="headline">Ubuntu Python环境+Vim配置 注意事项</h1>
+            <h1 class="post-title" itemprop="headline">GVIM 安装 YouCompleteMe</h1>
             <section class="post-meta">
-                <time class="post-date" itemprop="datePublished" datetime="2014YYY-00M-%DD">Wednesday, September 03, 2014</time>
-                on <a href="tag/python.html">Python, </a><a href="tag/vim.html">Vim, </a><a href="tag/ubuntu.html">Ubuntu</a>            </section>
+                <time class="post-date" itemprop="datePublished" datetime="2017YYY-00M-%DD">Friday, March 10, 2017</time>
+                on <a href="tag/vim.html">Vim, </a><a href="tag/gvim.html">Gvim</a>            </section>
         </header>
         <section class="post-content">
-            <p>以前曾经尝试使用CentOS，不过感觉<code>YUM</code>没<code>APT</code>好用，于是选择了Ubuntu作为重新学习Linux的操作系统，毕竟Ubuntu在内地的受支持度还是很高的，至少没被qiang→_→</p>
-<h2></h2>
-<div class="highlight"><pre><span></span>虚拟机：VMware Workstation 9
-
-系统：Ubuntu 14.04.1
-</pre></div>
-
-
-<h2></h2>
-<p>使用 VMware-Workstation 安装<code>Ubuntu</code>，当如CPU是64位，而安装系统是32位，则会在开机时提示</p>
-<div class="highlight"><pre><span></span>piix4_smbus 0000:00:007.3: Host SMBus controller not enabled
-</pre></div>
-
-
-<p>这是因为 Ubuntu 找不到 i2c_piix4 模块所致，</p>
-<p>解决方法：在<code>/etc/modprobe.d/blacklist.conf</code> 末尾加入 <code>blacklist i2c-pii4x</code></p>
-<h2></h2>
-<h3>Python</h3>
-<p>在<code>Ubuntu 14.04</code>中已安装了 <strong>Python2.7.6</strong> 和 <strong>Python3.4.0</strong>，在终端输入<code>python</code>进入Python交互模式默认版本是 <strong>Python2.7.6</strong>，当需要使用 <strong>Python3.x</strong> 时就会很麻烦。</p>
-<p>删除<code>/usr/bin/python</code>，然后重新建立软链接</p>
-<div class="highlight"><pre><span></span># ln -s /usr/bin/python3.4 /usr/bin/python
-</pre></div>
-
-
-<p>这样就可以解决问题了。</p>
-<p>可是重启系统后提示系统错误，<code>/usr/lib/cups/backend/hpfax</code>发生错误，</p>
-<p>原因是<code>/usr/lib/cups/backend/hpfax</code>使用的是 <strong>Python2.x</strong>，</p>
-<p>我们只需编辑它，把文件头<code>#!/usr/bin/python</code>改为<code>#！/usr/bin/python2</code>即可。</p>
+            <p><img alt="image" src="/static/youcompleteme.gif" /></p>
+<p><a href="https://github.com/Valloric/YouCompleteMe"><strong>YouCompleteMe</strong></a> 是一款功能强大且性能优秀的 VIM 代码补全插件。它支持绝大部分编程语言的代码补全，同时支持代码搜索跳转，使用 VIM 编程的都离不开它。</p>
+<p>然而，由于它功能强大，使它的安装没那么轻松。由于在 Linux 环境下安装 <strong>YouCompleteMe</strong> 相对简单，只需按找文档的<a href="https://github.com/Valloric/YouCompleteMe#installation"><strong>安装指南</strong></a>操作即可，本文仅记录 Windows 环境下的安装过程。</p>
 <blockquote>
-<p>更新：上述方法过于 dirty，其实使用 <code>pyenv</code> 管理 Python 版本更加方便</p>
+<p>系统：Windows 10 （64bit）</p>
+<p>环境：GVIM 8.0+（32bit），Python3.3+（32bit），CMake（newest 32bit）， Visual Studio 2015 Community（仅安装 C++ 组件）</p>
 </blockquote>
-<h2></h2>
-<h3>Vim</h3>
-<p>一般我们选择安装<code>vim-gnome</code></p>
-<div class="highlight"><pre><span></span># apt-get install vim-gnome
+<p>需要注意的地方是，所有环境工具（除 VSC）需要安装 <strong>32</strong> 位版本。</p>
+<p>原因是，从 <strong>VIM</strong> / <strong>GVIM</strong> （以下统称 VIM）的版本信息（<code>:version</code>）中可以看到</p>
+<div class="highlight"><pre><span></span>VIM - Vi IMproved 8.0 
+...
++conceal            +keymap             +python/dyn         +visual
++cryptv             +lambda             +python3/dyn        +visualextra
++cscope             +langmap            +quickfix           +viminfo
 </pre></div>
 
 
-<p>这是一个有Gui的Vim，优势在于可使用标签分页。</p>
-<p>如果是想让终端的Vim支持鼠标操作，在<code>~/.vimrc</code>中加入<code>set mouse=a</code>即可。</p>
-<p>在切换到root用户时，如果使用<code>su</code>切换，第一次打开gvim是会提示错误</p>
-<div class="highlight"><pre><span></span>……
-(gvim:2515): GConf-WARNING **: Client failed to connect to the D-BUS daemon
-……
+<p>VIM 对 Python 是动态支持（<code>python/dyn</code>），即当 VIM 需要用到 Python 运行环境时才动态加载。不知是否版本的原因，<strong>64</strong> 位的 VIM 与 <strong>64</strong> 位的 Python3 无法兼容，导致 <code>YouCompleteMe unavailable: requires Vim compiled with Python (2.6+ or 3.3+) support</code> 的错误。</p>
+<p>首先，我们使用 <a href="https://github.com/VundleVim/Vundle.vim"><strong>Vundle.vim</strong></a> 或 Git 下载 <strong>YouComplete</strong> 的版本库（<em>~~由于国情关系~~，建议连上 VPN，否则龟速下载</em>）：</p>
+<div class="highlight"><pre><span></span>git clone https://github.com/Valloric/YouCompleteMe.git
 </pre></div>
 
 
-<p>解决办法是使用<code>su -</code>切换到root用户。</p>
+<p>然后，我们还需下载它的子模块版本库（如果使用 Vundle.vim 安装就不需要再进行此步骤）：</p>
+<div class="highlight"><pre><span></span><span class="nb">cd</span> YouCompleteMe
+git submodule update --init --recursive
+</pre></div>
+
+
+<p>下载完成后，我们开始进行编译，在 YouComplete 目录下以启动命令行：</p>
+<div class="highlight"><pre><span></span>md ycmd_build
+<span class="nb">cd</span> ycmd_build
+
+cmake -G <span class="s2">&quot;Visual Studio 14&quot;</span> -DPYTHON_LIBRARY<span class="o">=</span>E:<span class="se">\P</span>ython35<span class="se">\l</span>ibs<span class="se">\p</span>ython35.lib -DPYTHON_INCLUDE_DIR<span class="o">=</span>E:<span class="se">\P</span>ython35<span class="se">\i</span>nclude -DUSE_PYTHON2<span class="o">=</span>OFF . ..<span class="se">\t</span>hird_party<span class="se">\y</span>cmd<span class="se">\c</span>pp
+</pre></div>
+
+
+<p><code>-DPYTHON_LIBRARY</code> 与 <code>-DPYTHON_INCLUDE_DIR</code> 分别指向 Python 安装目录的库，按实际进行修改路径。 </p>
+<p>编译完成后，开始生成项目：</p>
+<div class="highlight"><pre><span></span>cmake --build . --target ycm_core --config Release
+</pre></div>
+
+
+<p>至此，应该已顺利完成 <strong>YouCompleteMe</strong> 的安装，可启动 VIM 进行测试。</p>
         </section>
         <footer class="post-footer">
             <figure class="author-image">
@@ -182,13 +177,13 @@
             </section>
             <section class="share">
                 <h4>Share this post</h4>
-                <a class="icon-twitter" href="https://twitter.com/share?text=Ubuntu%20Python%E7%8E%AF%E5%A2%83%2BVim%E9%85%8D%E7%BD%AE ...%20via%20%40&amp;url=/posts/2014/ubuntu-python-vim.html" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                <a class="icon-twitter" href="https://twitter.com/share?text=GVIM%20%E5%AE%89%E8%A3%85%20YouCompleteMe%20via%20%40&amp;url=/posts/2017/gvim-install-youcompleteme.html" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
                     <span class="hidden">Twitter</span>
                 </a>
-                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=/posts/2014/ubuntu-python-vim.html" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=/posts/2017/gvim-install-youcompleteme.html" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
                     <span class="hidden">Facebook</span>
                 </a>
-                <a class="icon-google-plus" href="https://plus.google.com/share?url=/posts/2014/ubuntu-python-vim.html" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                <a class="icon-google-plus" href="https://plus.google.com/share?url=/posts/2017/gvim-install-youcompleteme.html" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
                     <span class="hidden">Google+</span>
                 </a>
             </section>
@@ -196,20 +191,12 @@
     </article>
 </main>
 <aside class="read-next">
-    <!-- a class="read-next-story" style="background-image: url('')" href="/posts/2014/custom-vagrant-box.html" -->
-    <a class="read-next-story" href="/posts/2014/custom-vagrant-box.html">
+    <!-- a class="read-next-story prev" style="background-image: url('')" href="/posts/2014/custom-vagrant-box.html" -->
+    <a class="read-next-story prev" href="/posts/2014/custom-vagrant-box.html">
         <section class="post">
             <h2>如何自定义一个使用ssh证书验证登录的VBox?</h2>
             <p><p>环境：Ubuntu-14.04.1-server-i386<em>，</em>Virtualbox 4.3.16<em>，</em>Vagrant 1.6.5<em>，</em>Win8.1*</p>
 <p>如何创建自定义 ...</p></p>
-        </section>
-    </a>
-    <!-- a class="read-next-story prev" style="background-image: url('')" href="/posts/2014/character-encoding.html" -->
-    <a class="read-next-story prev" href="/posts/2014/character-encoding.html">
-        <section class="post">
-            <h2>字符编码</h2>
-            <p><p>字符串是一种数据类型，但是，字符串比较特殊的是还有一个编码问题。</p>
-<p>因为计算机只能处理数字，如果要处理文本，就必须先把文本转换为数字才能处理。最早的计算机在设计时采用8个比特（bit）作为一个字节（byte），所以，一个字节能表示的最大的整数就是255（二进制11111111=十进制255），如果要表示更大的整数 ...</p></p>
         </section>
     </a>
 </aside>             <footer class="site-footer clearfix" role="contentinfo" itemscope itemtype="http://schema.org/WPFooter">

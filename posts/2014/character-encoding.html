@@ -60,11 +60,11 @@
         <meta property="og:type" content="article">
         <meta property="og:title" content="字符编码">
         <meta property="og:url" content="posts/2014/character-encoding.html">
-        <meta property="og:description" content="ARTICLE_URL = &#39;posts/{date:%Y}/&#39; 字符串是一种数据类型，但是，字符串比较特殊的是还有一个编码问题。 因为计算机只能处理数字，如果要处理文本，就必须先把文本转换为数字才能处理。最早的计算机在设计时采用8个比特（bit）作为一个字节（byte），所以 ...">
+        <meta property="og:description" content="字符串是一种数据类型，但是，字符串比较特殊的是还有一个编码问题。 因为计算机只能处理数字，如果要处理文本，就必须先把文本转换为数字才能处理。最早的计算机在设计时采用8个比特（bit）作为一个字节（byte），所以，一个字节能表示的最大的整数就是255（二进制11111111=十进制255），如果要表示更大的整数 ...">
         <meta property="article:published_time" content="Tuesday, May 20, 2014">
         <meta name="twitter:title" content="字符编码">
-        <meta name="twitter:description" content="ARTICLE_URL = &#39;posts/{date:%Y}/&#39; 字符串是一种数据类型，但是，字符串比较特殊的是还有一个编码问题。 因为计算机只能处理数字，如果要处理文本，就必须先把文本转换为数字才能处理。最早的计算机在设计时采用8个比特（bit）作为一个字节（byte），所以 ...">
-        <meta name="description" content="ARTICLE_URL = &#39;posts/{date:%Y}/&#39; 字符串是一种数据类型，但是，字符串比较特殊的是还有一个编码问题。 因为计算机只能处理数字，如果要处理文本，就必须先把文本转换为数字才能处理。最早的计算机在设计时采用8个比特（bit）作为一个字节（byte），所以 ...">
+        <meta name="twitter:description" content="字符串是一种数据类型，但是，字符串比较特殊的是还有一个编码问题。 因为计算机只能处理数字，如果要处理文本，就必须先把文本转换为数字才能处理。最早的计算机在设计时采用8个比特（bit）作为一个字节（byte），所以，一个字节能表示的最大的整数就是255（二进制11111111=十进制255），如果要表示更大的整数 ...">
+        <meta name="description" content="字符串是一种数据类型，但是，字符串比较特殊的是还有一个编码问题。 因为计算机只能处理数字，如果要处理文本，就必须先把文本转换为数字才能处理。最早的计算机在设计时采用8个比特（bit）作为一个字节（byte），所以，一个字节能表示的最大的整数就是255（二进制11111111=十进制255），如果要表示更大的整数 ...">
         <meta name="twitter:creator" content="@">
         <meta property="og:image" content="/theme/images/logo.png">
         <meta name="twitter:image" content="/theme/images/logo.png">
@@ -117,8 +117,7 @@
                 on <a href="tag/encode.html">Encode</a>            </section>
         </header>
         <section class="post-content">
-            <p>ARTICLE_URL = 'posts/{date:%Y}/'
-字符串是一种数据类型，但是，字符串比较特殊的是还有一个编码问题。</p>
+            <p>字符串是一种数据类型，但是，字符串比较特殊的是还有一个编码问题。</p>
 <p>因为计算机只能处理数字，如果要处理文本，就必须先把文本转换为数字才能处理。最早的计算机在设计时采用8个比特（bit）作为一个字节（byte），所以，一个字节能表示的最大的整数就是255（二进制11111111=十进制255），如果要表示更大的整数，就必须用更多的字节。比如两个字节可以表示的最大整数是<code>65535</code>，4个字节可以表示的最大整数是<code>4294967295</code>。</p>
 <p>由于计算机是美国人发明的，因此，最早只有127个字母被编码到计算机里，也就是大小写英文字母、数字和一些符号，这个编码表被称为<code>ASCII</code>编码，比如大写字母<code>A</code>的编码是<code>65</code>，小写字母<code>z</code>的编码是<code>122</code>。</p>
 <p>但是要处理中文显然一个字节是不够的，至少需要两个字节，而且还不能和<code>ASCII</code>编码冲突，所以，中国制定了<code>GB2312</code>编码，用来把中文编进去。</p>
