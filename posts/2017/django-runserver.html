@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>tin</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta http-equiv="imagetoolbar" content="no">
+        <meta http-equiv="pragma" content="cache">
+        <meta http-equiv="cache-control" content="cache">
+        <meta http-equiv="vary" content="content-language">
+        <meta http-equiv="Cache-control" content="max-age=2592000, public">
+        <meta http-equiv="content-style-type" content="text/css">
+        <link rel="dns-prefetch" href=""/>
+        <link rel="dns-prefetch" href="//www.gstatic.com"/>
+        <link rel="dns-prefetch" href="//fonts.gstatic.com"/>
+        <link rel="dns-prefetch" href="//fonts.googleapis.com"/>
+        <link rel="dns-prefetch" href="//twemoji.maxcdn.com"/>
+        <link rel="dns-prefetch" href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400"/>
+        <link rel="stylesheet" type="text/css" href="/theme/css/screen.min.css">
+        <link rel="stylesheet" type="text/css" href="/theme/css/highlight.min.css">
+        <link rel="stylesheet" type="text/css" href="/theme/css/custom.min.css">
+        <link rel="stylesheet" type="text/css" href="/theme/css/twemoji-awesome.min.css">
+        <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400" />
+        <link rel="publisher" href="">
+        <link rel="apple-touch-startup-image" href="/theme/images/logo.png">
+        <link type="text/plain" rel="socialmedia" href="/socialmedia.txt">
+        <meta http-equiv="content-type" content="text/html;charset=utf-8">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+        <meta name="apple-mobile-web-app-capable" content="yes"/>
+        <meta name="application-name" content="tin"/>
+        <meta name="msapplication-starturl" content="http:"/>
+        <meta name="msapplication-tooltip" content=""/>
+        <meta name="msapplication-window" content="width=1024;height=768"/>
+        <meta name="msapplication-task" content="name=tin;action-uri=http:;icon-uri=/theme/images/favicon.ico"/>
+        <meta name="msapplication-TileImage" content="/theme/images/apple-touch-icon-144x144.png"/>
+        <meta name="msapplication-TileColor" content="#1F1F21"/>
+        <meta name="application-name" content="tin">
+        <meta name="HandheldFriendly" content="True">
+        <meta name="MobileOptimized" content="320"/>
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="google-site-verification" content="">
+        <meta name="alexaVerifyID" content=""/>
+        <meta name="wot-verification" content=""/>
+        <meta name="msvalidate.01" content="" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <meta name="medium" content="mult">
+        <meta name="adblock" content="disable">
+        <meta name="rating" content="General">
+        <meta name="resource-type" content="document">
+        <meta name="revisit-after" content="1 days">
+        <meta name="revisit" content="1">
+        <meta name="robots" content="index,follow">
+        <meta name="no-email-collection" content="http://www.unspam.com/noemailcollection/">
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:site" content="@">
+        <meta property="og:site_name" content="tin">
+        <meta property="og:locale" content="cn">
+        <link rel="canonical" href="/posts/2017/django-runserver.html">
+        <meta property="og:type" content="article">
+        <meta property="og:title" content="Django runserver">
+        <meta property="og:url" content="posts/2017/django-runserver.html">
+        <meta property="og:description" content="前言 为了方便开发者的本地测试，Django 提供了一个简单单进程的本地服务器， 执行 runserver 命令即可启动该服务器。 本文将通过探究一下 runserver 的内部实现。 开始 $ my-django-project&gt; ./manage.py runserver …">
+        <meta property="article:published_time" content="星期四, 十月 26, 2017">
+        <meta name="twitter:title" content="Django runserver">
+        <meta name="twitter:description" content="前言 为了方便开发者的本地测试，Django 提供了一个简单单进程的本地服务器， 执行 runserver 命令即可启动该服务器。 本文将通过探究一下 runserver 的内部实现。 开始 $ my-django-project&gt; ./manage.py runserver …">
+        <meta name="description" content="前言 为了方便开发者的本地测试，Django 提供了一个简单单进程的本地服务器， 执行 runserver 命令即可启动该服务器。 本文将通过探究一下 runserver 的内部实现。 开始 $ my-django-project&gt; ./manage.py runserver …">
+        <meta name="twitter:creator" content="@">
+        <meta property="og:image" content="/theme/images/logo.png">
+        <meta name="twitter:image" content="/theme/images/logo.png">
+        <meta property="og:image:type" content="image/png">
+        <meta property="og:image:width" content="300">
+        <meta property="og:image:height" content="300">
+        <meta property="article:section" content="Python">
+        <meta property="article:tag" content="django">
+        <meta property="article:author" content="midtin">
+    </head>
+    <body class="post-template nav-closed" itemscope itemtype="http://schema.org/WebPage">
+        <meta itemprop="name" content="tin">
+        <meta itemprop="url" content="">
+        <meta itemprop="headline" content="tin || ">
+        <meta itemprop="description about" content="">
+        <meta itemprop="keywords" content="">
+        <meta itemprop="inLanguage" content="cn">
+<nav class="nav">
+    <h3 class="nav-title">Menu</h3>
+    <a href="#" class="nav-close">
+        <span class="hidden">Close</span>
+    </a>
+    <ul role="menubar">
+        <li class="" role="presentation"><a  href="/index.html" title="tin" itemprop="name" itemprop="significantLink">Home</a></li>
+            <li role="presentation"><a  href="/author/midtin.html" title="About me" itemprop="name" itemprop="significantLink">About me</a></li>
+            <li role="presentation"><a  href="https://www.python.org/" title="Python.org" itemprop="name" itemprop="significantLink">Python.org</a></li>
+            <li role="presentation"><a  href="https://www.djangoproject.com/" title="Django" itemprop="name" itemprop="significantLink">Django</a></li>
+            <li class="" role="presentation"><a  href="/archives.html" title="tin | Archives" itemprop="name" itemprop="significantLink">Archives</a></li>
+    </ul>
+</nav>
+<span class="nav-cover"></span>        <div class="site-wrapper">
+            <header class="main-header post-head" style="background-image: url('/static/header-image.jpg'); background-size: 1440px; background-color: black" itemscope itemtype="http://schema.org/WPHeader">
+                <nav class="main-nav overlay clearfix">
+                    <a class="menu-button" href="#">
+                        <span class="burger">&#9776;</span>
+                        <span class="word">Menu</span>
+                    </a>
+                </nav>
+                <div class="vertical">
+                    <div class="main-header-content inner">
+                    </div>
+                </div>
+            </header>
+<main id="content" class="content" role="main">
+    <article class="post" itemscope="" itemtype="http://schema.org/BlogPosting" itemprop="blogPost">
+        <header class="post-header">
+            <h1 class="post-title" itemprop="headline">Django runserver</h1>
+            <section class="post-meta">
+                <time class="post-date" itemprop="datePublished" datetime="2017YYY-40M-%DD">星期四, 十月 26, 2017</time>
+                on <a href="tag/django.html">Django</a>            </section>
+        </header>
+        <section class="post-content">
+            <h2>前言</h2>
+<p>为了方便开发者的本地测试，Django 提供了一个简单单进程的本地服务器， 执行 <code>runserver</code> 命令即可启动该服务器。</p>
+<p>本文将通过探究一下 <code>runserver</code> 的内部实现。</p>
+<h2>开始</h2>
+<div class="highlight"><pre><span></span>$ my-django-project&gt; ./manage.py runserver
+</pre></div>
+
+
+<p>在 manage.py 内，Django 会读取需要执行的命令及参数，并执行 <code>execute_from_command_line</code> 方法。</p>
+<p><code>execute_from_command_line</code> 方法会使用 sys.argv 参数初始化 <code>django.core.management.ManagementUtility</code> 并执行其 <code>execute</code> 方法。</p>
+<p><code>execute</code> 会找到 <code>django.core.management.commands</code> 下的 runserver.py 并获取其中的 Command 类型，初始化并调用其实例的 <code>run_from_argv</code> 方法。</p>
+<div class="highlight"><pre><span></span><span class="c1"># 代码节选</span>
+<span class="c1"># manage.py</span>
+
+<span class="kn">from</span> <span class="nn">django.core.management</span> <span class="kn">import</span> <span class="n">execute_from_command_line</span>
+<span class="n">execute_from_command_line</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span>
+
+
+<span class="c1"># django.core.management.__init__.py</span>
+
+<span class="k">class</span> <span class="nc">ManagementUtility</span><span class="p">:</span>
+
+    <span class="o">...</span>
+
+    <span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="k">if</span> <span class="n">subcommand</span> <span class="o">==</span> <span class="s1">&#39;runserver&#39;</span> <span class="ow">and</span> <span class="s1">&#39;--noreload&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">argv</span><span class="p">:</span>
+            <span class="n">_parser</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fetch_command</span><span class="p">(</span><span class="s1">&#39;runserver&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">create_parser</span><span class="p">(</span><span class="s1">&#39;django&#39;</span><span class="p">,</span> <span class="s1">&#39;runserver&#39;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">fetch_command</span><span class="p">(</span><span class="n">subcommand</span><span class="p">)</span><span class="o">.</span><span class="n">run_from_argv</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span>
+</pre></div>
+
+
+<h2>执行准备</h2>
+<p><code>run_from_argv</code> 会对传入的参数进行解析并执行 <code>Command.execute</code> 方法，开始准备并执行命令操作。</p>
+<div class="highlight"><pre><span></span><span class="c1"># 代码节选</span>
+<span class="c1"># django.core.management.base.py</span>
+
+<span class="k">class</span> <span class="nc">BaseCommand</span><span class="p">:</span>
+
+    <span class="k">def</span> <span class="nf">run_from_argv</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">argv</span><span class="p">):</span>
+        <span class="n">parser</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_parser</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+        <span class="n">options</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">:])</span>
+        <span class="n">cmd_options</span> <span class="o">=</span> <span class="nb">vars</span><span class="p">(</span><span class="n">options</span><span class="p">)</span>
+
+        <span class="n">args</span> <span class="o">=</span> <span class="n">cmd_options</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;args&#39;</span><span class="p">,</span> <span class="p">())</span>
+        <span class="n">handle_default_options</span><span class="p">(</span><span class="n">options</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">cmd_options</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">):</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">handle</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">output</span>
+</pre></div>
+
+
+<p><code>execute</code> 会进行下列操作：</p>
+<ol>
+<li>检查并配置 <code>stdout</code>、<code>stderr</code>；</li>
+<li>检查区域，获取语言配置；</li>
+<li>Django 系统检查（暂时未找到检查项在哪里进行了注册）；</li>
+<li>migrations 检查，但这里只会发出警告，不会报错并终止命令执行；</li>
+<li>调用实例的 <code>handle</code> 方法执行命名操作；</li>
+<li>处理 <code>handle</code> 的返回结果并返回处理后的结果；</li>
+</ol>
+<h2>执行</h2>
+<p>Django 会准备本地服务器的基础信息，如绑定的 IP 地址、端口、使用的协议、WSGIHandler，在准备完成后，Django 会开始配置本地的 WSGI 服务器，并调用 <code>serve_forever</code> 启动服务器。</p>
+<h3>WSGIServer</h3>
+<p><code>django.core.servers.basehttp.WSGIServer</code> 是一个继承 Python 的 <code>wsgiref.simple_server.WSGIServer</code> 的子类，</p>
+<p>里面只做了一点改动，所有功能实现仍使用其父类的实现。</p>
+<p>我们来看下它的 mro</p>
+<div class="highlight"><pre><span></span>&gt; WSGIServer.mro<span class="o">()</span>
+
+<span class="o">[</span>django.core.servers.basehttp.WSGIServer,
+ wsgiref.simple_server.WSGIServer,
+ http.server.HTTPServer,
+ socketserver.TCPServer,
+ socketserver.BaseServer,
+ object<span class="o">]</span>
+</pre></div>
+
+
+<p><code>wsgiref.simple_server.WSGIServer</code> 的具体处理流程和实现细节，可阅读 <a href="https://www.python.org/dev/peps/pep-0333/">PEP 333</a> / <a href="https://www.python.org/dev/peps/pep-3333/">PEP 3333</a> 和其源码了解。</p>
+<p>本文更关心 HTTP 请求是如何进入到 Django 内部并通过 url 找到我们已注册的 Views 的。</p>
+<p><code>WSGIServer</code> 会把从 socket 接收到请求数据进行处理，并使用初始化时传入的 <code>RequestHandler</code> 进行请求的处理。</p>
+<div class="highlight"><pre><span></span><span class="c1"># 代码节选</span>
+<span class="c1"># socketserver.py</span>
+
+<span class="k">class</span> <span class="nc">BaseServer</span><span class="p">:</span>
+
+    <span class="k">def</span> <span class="nf">serve_forever</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">poll_interval</span><span class="o">=</span><span class="mf">0.5</span><span class="p">):</span>
+        <span class="o">...</span>
+
+    <span class="k">def</span> <span class="nf">finish_request</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">client_address</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Finish one request by instantiating RequestHandlerClass.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">RequestHandlerClass</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">client_address</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
+
+
+<span class="c1"># django.core.servers.basehttp.py</span>
+
+<span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="n">addr</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">wsgi_handler</span><span class="p">,</span> <span class="n">ipv6</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">threading</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">server_cls</span><span class="o">=</span><span class="n">WSGIServer</span><span class="p">):</span>
+    <span class="o">...</span>
+    <span class="n">httpd</span> <span class="o">=</span> <span class="n">httpd_cls</span><span class="p">(</span><span class="n">server_address</span><span class="p">,</span> <span class="n">WSGIRequestHandler</span><span class="p">,</span> <span class="n">ipv6</span><span class="o">=</span><span class="n">ipv6</span><span class="p">)</span>
+    <span class="n">httpd</span><span class="o">.</span><span class="n">set_app</span><span class="p">(</span><span class="n">wsgi_handler</span><span class="p">)</span>
+    <span class="n">httpd</span><span class="o">.</span><span class="n">serve_forever</span><span class="p">()</span>
+</pre></div>
+
+
+<p>我们可以看到 Django 使用了 <code>WSGIRequestHandler</code> 进行了请求的处理，它里面有着我们想要知道的东西。</p>
+<h3>WSGIRequestHandler</h3>
+<p><code>django.core.servers.basehttp.WSGIRequestHandler</code> 是继承了 <code>wsgiref.simple_server.WSGIRequestHandler</code> 的子类。</p>
+<p>我们先看下它的继承关系，其部分代码：</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">WSGIRequestHandler</span><span class="o">.</span><span class="n">mro</span><span class="p">()</span>
+<span class="p">[</span><span class="n">django</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">servers</span><span class="o">.</span><span class="n">basehttp</span><span class="o">.</span><span class="n">WSGIRequestHandler</span><span class="p">,</span>
+ <span class="n">wsgiref</span><span class="o">.</span><span class="n">simple_server</span><span class="o">.</span><span class="n">WSGIRequestHandler</span><span class="p">,</span>
+ <span class="n">http</span><span class="o">.</span><span class="n">server</span><span class="o">.</span><span class="n">BaseHTTPRequestHandler</span><span class="p">,</span>
+ <span class="n">socketserver</span><span class="o">.</span><span class="n">StreamRequestHandler</span><span class="p">,</span>
+ <span class="n">socketserver</span><span class="o">.</span><span class="n">BaseRequestHandler</span><span class="p">,</span>
+ <span class="nb">object</span><span class="p">]</span>
+
+
+
+<span class="c1"># 代码节选</span>
+<span class="c1"># django.core.servers.basehttp.py</span>
+
+<span class="k">class</span> <span class="nc">WSGIRequestHandler</span><span class="p">(</span><span class="n">simple_server</span><span class="o">.</span><span class="n">WSGIRequestHandler</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">handle</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Copy of WSGIRequestHandler, but with different ServerHandler&quot;&quot;&quot;</span>
+
+        <span class="o">...</span>
+
+        <span class="n">handler</span> <span class="o">=</span> <span class="n">ServerHandler</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">rfile</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">wfile</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_stderr</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_environ</span><span class="p">()</span>
+        <span class="p">)</span>
+        <span class="n">handler</span><span class="o">.</span><span class="n">request_handler</span> <span class="o">=</span> <span class="bp">self</span>      <span class="c1"># backpointer for logging</span>
+        <span class="n">handler</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">server</span><span class="o">.</span><span class="n">get_app</span><span class="p">())</span>
+
+
+<span class="c1"># wsgiref.handlers.py</span>
+
+<span class="k">class</span> <span class="nc">BaseHandler</span><span class="p">:</span>
+
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">application</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Invoke the application&quot;&quot;&quot;</span>
+        <span class="c1"># Note to self: don&#39;t move the close()!  Asynchronous servers shouldn&#39;t</span>
+        <span class="c1"># call close() from finish_response(), so if you close() anywhere but</span>
+        <span class="c1"># the double-error branch here, you&#39;ll break asynchronous servers by</span>
+        <span class="c1"># prematurely closing.  Async servers must return from &#39;run()&#39; without</span>
+        <span class="c1"># closing if there might still be output to iterate over.</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">setup_environ</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">result</span> <span class="o">=</span> <span class="n">application</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">environ</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">start_response</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">finish_response</span><span class="p">()</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">handle_error</span><span class="p">()</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="c1"># If we get an error handling an error, just give up already!</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+                <span class="k">raise</span>
+</pre></div>
+
+
+<p>Django 的 <code>WSGIRequestHandler</code> 重写了 <code>handle</code> 方法，原因在于使用了不同的 <code>ServerHandler</code>，而使用的 <code>ServerHandler</code> 只是修改了处理错误的逻辑。</p>
+<p>关键在于 <code>handler.run(self.server.get_app())</code>，从 <code>BaseHandler</code> 的代码中我们可以看到 Handler 会直接调用由参数传入的 application 并获得返回结果，在 Django 中，这个返回结果就是经过 Django 处理后的 HTTP Response，而这个 application 的真面目就是 Django 的 <code>WSGIHandler</code> 实例。</p>
+<h3>WSGIHandler</h3>
+<p>我们可以从我们项目中的 wsgi.py 文件中找到获取 <code>WSGIHandler</code> 的调用。</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">WSGIHanlder</span><span class="o">.</span><span class="n">mro</span><span class="p">()</span>
+<span class="p">[</span><span class="n">django</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">handlers</span><span class="o">.</span><span class="n">wsgi</span><span class="o">.</span><span class="n">WSGIHandler</span><span class="p">,</span>
+ <span class="n">django</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">handlers</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">BaseHandler</span><span class="p">,</span>
+ <span class="nb">object</span><span class="p">]</span>
+
+<span class="c1"># 代码节选</span>
+<span class="c1"># django.core.handlers.base.py</span>
+
+<span class="k">class</span> <span class="nc">BaseHandler</span><span class="p">:</span>
+
+    <span class="k">def</span> <span class="nf">_get_response</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
+        <span class="n">resolver_match</span> <span class="o">=</span> <span class="n">resolver</span><span class="o">.</span><span class="n">resolve</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">path_info</span><span class="p">)</span>
+        <span class="n">callback</span><span class="p">,</span> <span class="n">callback_args</span><span class="p">,</span> <span class="n">callback_kwargs</span> <span class="o">=</span> <span class="n">resolver_match</span>
+
+        <span class="k">for</span> <span class="n">middleware_method</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_view_middleware</span><span class="p">:</span>
+            <span class="n">response</span> <span class="o">=</span> <span class="n">middleware_method</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">callback</span><span class="p">,</span> <span class="n">callback_args</span><span class="p">,</span> <span class="n">callback_kwargs</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">response</span><span class="p">:</span>
+                <span class="k">break</span>
+</pre></div>
+
+
+<p><code>WSGIHandler</code> 预加载了在 settings 里指定的 middleware 并按顺序进行串联，这样使得每个进来的 request 和输出的 response 都必须经过这些 middleware 的处理。</p>
+<p><code>_get_response</code> 方法解析请求的路由信息并找到对应的 View，<code>callback</code> 就是对应的 View 函数。</p>
+<p>至此，我们终于知道 HTTP 请求是如何进入到 View 里面的。</p>
+<p>其实 <code>WSGIHandler</code> 就是 WSGI 里描述的 application，当我们使用 uWSGI 等支持 WSGI 协议的服务器运行 Django 时， 提供的 application 就是 <code>WSGIHandler</code>。</p>
+<div class="highlight"><pre><span></span> +-------------+            +-----------------------+
+ |             |            |                       |
+ |  WSGIServer | ---------&gt; |   WSGIRequestHandler  |
+ |             |            |                       |
+ +-------------+            +-----------------------+
+                                       |
+                                       |
+                                       |
+                                       |
+                                       |
+                                       |
+                                       v
+ +---------------+            +------------------+
+ |               |            |                  |
+ |  WSGIHandler  | &lt;--------- |   ServerHandler  |
+ |               |            |                  |
+ +---------------+            +------------------+
+</pre></div>
+
+
+<h3>关于 Auto Reload</h3>
+<p>当我们执行 <code>runserver</code> 没有使用 --noreload 选项时，大部分项目中文件的修改都会触发 Django 本地服务器的重启。</p>
+<p>在 <code>runserver</code> 的命令开始执行前，Django 会开启一个子进程并配置环境变量 <code>RUN_MAIN = "true"</code>，在子进程内 Django 会重新执行一遍 <code>runserver</code> 命令，这时 Django 会在子进程内启动一条新的线程用于运行本地服务器，而子进程的主线程用于监控文件的修改。</p>
+<p>当检测到有代码文件被修改或创建或删除时，Django 会结束子进程并返回 <code>exit_code</code>，Django 主进程检查到 <code>exit_code</code> 为 3 时会重复上述步骤重新启动本地服务器。</p>
+<p>Django 的文件监控的方式分为两种：</p>
+<ol>
+<li>
+<p>简单检测文件的修改时间，以及项目目录下所有文件的文件名；</p>
+</li>
+<li>
+<p>当 Python 环境中安装了 pyinotify 库时，会使用它进行文件监控;</p>
+</li>
+</ol>
+<p>具体实现可参考 <code>django.utils.autoreload.py</code> 里的代码</p>
+        </section>
+        <!-- BEGIN LINK -->
+        <a rel="nofollow" href="https://affiliate.namecheap.com/?affId=118886" target="_blank">
+            <img src="https://files.namecheap.com/graphics/linkus/234x60-2.gif" width="234" height="60" border="0" alt="Namecheap.com">
+        </a>
+        <!-- END LINK -->
+        <footer class="post-footer">
+            <figure class="author-image">
+                <a class="img" href="author/midtin.html" style="background-image: url('/static/avatar.jpg')"><span class="hidden">midtin's Picture</span></a>
+            </figure>
+            <section class="author">
+                <h4>
+                    <a href="author/midtin.html">midtin</a>
+                </h4>
+                <p>人生苦短，_______</p>
+                <div class="author-meta">
+                    <span class="author-location icon-location">GuangZhou</span>                 </div>
+            </section>
+            <section class="share">
+                <h4>Share this post</h4>
+                <a class="icon-twitter" href="https://twitter.com/share?text=Django%20runserver%20via%20%40&amp;url=/posts/2017/django-runserver.html" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <span class="hidden">Twitter</span>
+                </a>
+                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=/posts/2017/django-runserver.html" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <span class="hidden">Facebook</span>
+                </a>
+                <a class="icon-google-plus" href="https://plus.google.com/share?url=/posts/2017/django-runserver.html" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <span class="hidden">Google+</span>
+                </a>
+            </section>
+        </footer>
+    </article>
+</main>
+<aside class="read-next">
+    <!-- a class="read-next-story prev" style="background-image: url('')" href="/posts/2017/gvim-install-youcompleteme.html" -->
+    <a class="read-next-story prev" href="/posts/2017/gvim-install-youcompleteme.html">
+        <section class="post">
+            <h2>GVIM 安装 YouCompleteMe</h2>
+            <!-- p><p><img alt="image" src="/static/youcompleteme.gif"></p>
+<p><a href="https://github.com/Valloric/YouCompleteMe"><strong>YouCompleteMe</strong></a> 是一款功能强大且性能优秀的 VIM 代码补全插件。它支持绝大部分编程语言的代码补全，同时支持代码搜索跳转，使用 VIM 编程的都离不开它。</p>
+<p>然而，由于它功能强大，使它的安装没那么轻松。由于在 Linux 环境下安装 …</p></p -->
+        </section>
+    </a>
+</aside>             <footer class="site-footer clearfix" role="contentinfo" itemscope itemtype="http://schema.org/WPFooter">
+                <section class="copyright">
+                    <a itemprop="url" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">
+                        CC Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
+                </section>
+                <section class="poweredby">
+                    Proudly published with
+                    <a itemprop="url" href="https://getpelican.org" target="_blank">Pelican</a>
+                </section>
+            </footer>
+        </div>
+    <script type="text/javascript" src="/theme/js/jquery-1.11.2.min.js"></script>
+    <script type="text/javascript" src="/theme/js/jquery.fitvids.min.js"></script>
+    <script type="text/javascript" src="/theme/js/index.min.js"></script>
+    </body>
+</html>
