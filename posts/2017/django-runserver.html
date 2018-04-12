@@ -60,11 +60,11 @@
         <meta property="og:type" content="article">
         <meta property="og:title" content="Django runserver">
         <meta property="og:url" content="posts/2017/django-runserver.html">
-        <meta property="og:description" content="前言 为了方便开发者的本地测试，Django 提供了一个简单单进程的本地服务器， 执行 runserver 命令即可启动该服务器。 本文将通过探究一下 runserver 的内部实现。 开始 $ my-django-project&gt; ./manage.py runserver …">
+        <meta property="og:description" content="前言 为了方便开发者的本地测试，Django 提供了一个简单的单进程本地服务器， 执行 runserver 命令即可启动该服务器。 本文将通过探究一下 runserver 的内部实现。参考的 Django 版本为 1.11 …">
         <meta property="article:published_time" content="星期四, 十月 26, 2017">
         <meta name="twitter:title" content="Django runserver">
-        <meta name="twitter:description" content="前言 为了方便开发者的本地测试，Django 提供了一个简单单进程的本地服务器， 执行 runserver 命令即可启动该服务器。 本文将通过探究一下 runserver 的内部实现。 开始 $ my-django-project&gt; ./manage.py runserver …">
-        <meta name="description" content="前言 为了方便开发者的本地测试，Django 提供了一个简单单进程的本地服务器， 执行 runserver 命令即可启动该服务器。 本文将通过探究一下 runserver 的内部实现。 开始 $ my-django-project&gt; ./manage.py runserver …">
+        <meta name="twitter:description" content="前言 为了方便开发者的本地测试，Django 提供了一个简单的单进程本地服务器， 执行 runserver 命令即可启动该服务器。 本文将通过探究一下 runserver 的内部实现。参考的 Django 版本为 1.11 …">
+        <meta name="description" content="前言 为了方便开发者的本地测试，Django 提供了一个简单的单进程本地服务器， 执行 runserver 命令即可启动该服务器。 本文将通过探究一下 runserver 的内部实现。参考的 Django 版本为 1.11 …">
         <meta name="twitter:creator" content="@">
         <meta property="og:image" content="/theme/images/logo.png">
         <meta name="twitter:image" content="/theme/images/logo.png">
@@ -118,8 +118,8 @@
         </header>
         <section class="post-content">
             <h2>前言</h2>
-<p>为了方便开发者的本地测试，Django 提供了一个简单单进程的本地服务器， 执行 <code>runserver</code> 命令即可启动该服务器。</p>
-<p>本文将通过探究一下 <code>runserver</code> 的内部实现。</p>
+<p>为了方便开发者的本地测试，Django 提供了一个简单的单进程本地服务器， 执行 <code>runserver</code> 命令即可启动该服务器。</p>
+<p>本文将通过探究一下 <code>runserver</code> 的内部实现。参考的 Django 版本为 1.11.12</p>
 <h2>开始</h2>
 <div class="highlight"><pre><span></span>$ my-django-project&gt; ./manage.py runserver
 </pre></div>
@@ -203,6 +203,7 @@
 <p><code>wsgiref.simple_server.WSGIServer</code> 的具体处理流程和实现细节，可阅读 <a href="https://www.python.org/dev/peps/pep-0333/">PEP 333</a> / <a href="https://www.python.org/dev/peps/pep-3333/">PEP 3333</a> 和其源码了解。</p>
 <p>本文更关心 HTTP 请求是如何进入到 Django 内部并通过 url 找到我们已注册的 Views 的。</p>
 <p><code>WSGIServer</code> 会把从 socket 接收到请求数据进行处理，并使用初始化时传入的 <code>RequestHandler</code> 进行请求的处理。</p>
+<p>注意 <code>httpd_cls</code> 是一般继承自 <code>socketserver.ThreadingMixIn</code>，<code>WSGIServer</code>，而 <code>socketserver.ThreadingMixIn</code> 为服务器增加了多线程的能力。</p>
 <div class="highlight"><pre><span></span><span class="c1"># 代码节选</span>
 <span class="c1"># socketserver.py</span>
 
@@ -220,6 +221,10 @@
 
 <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="n">addr</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">wsgi_handler</span><span class="p">,</span> <span class="n">ipv6</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">threading</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">server_cls</span><span class="o">=</span><span class="n">WSGIServer</span><span class="p">):</span>
     <span class="o">...</span>
+    <span class="k">if</span> <span class="n">threading</span><span class="p">:</span>
+        <span class="n">httpd_cls</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="s1">&#39;WSGIServer&#39;</span><span class="p">),</span> <span class="p">(</span><span class="n">socketserver</span><span class="o">.</span><span class="n">ThreadingMixIn</span><span class="p">,</span> <span class="n">server_cls</span><span class="p">),</span> <span class="p">{})</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">httpd_cls</span> <span class="o">=</span> <span class="n">server_cls</span>
     <span class="n">httpd</span> <span class="o">=</span> <span class="n">httpd_cls</span><span class="p">(</span><span class="n">server_address</span><span class="p">,</span> <span class="n">WSGIRequestHandler</span><span class="p">,</span> <span class="n">ipv6</span><span class="o">=</span><span class="n">ipv6</span><span class="p">)</span>
     <span class="n">httpd</span><span class="o">.</span><span class="n">set_app</span><span class="p">(</span><span class="n">wsgi_handler</span><span class="p">)</span>
     <span class="n">httpd</span><span class="o">.</span><span class="n">serve_forever</span><span class="p">()</span>
@@ -379,6 +384,19 @@
     </article>
 </main>
 <aside class="read-next">
+    <!-- a class="read-next-story" style="background-image: url('')" href="/posts/2018/redis.html" -->
+    <a class="read-next-story" href="/posts/2018/redis.html">
+        <section class="post">
+            <h2>Redis 事务</h2>
+            <!-- p><h1>Redis 事务</h1>
+<p>Redis 的事务能够保证我们在事务中的一组命令能够按顺序地执行，执行期间 Redis 不会处理其它的客户端的命令请求</p>
+<p>以下是 Redis 事务的简单用法:</p>
+<div class="highlight"><pre><span></span>redis&gt; MULTI
+OK
+
+redis&gt; SET …</pre></div></p -->
+        </section>
+    </a>
     <!-- a class="read-next-story prev" style="background-image: url('')" href="/posts/2017/gvim-install-youcompleteme.html" -->
     <a class="read-next-story prev" href="/posts/2017/gvim-install-youcompleteme.html">
         <section class="post">

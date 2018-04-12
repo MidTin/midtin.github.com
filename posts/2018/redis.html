@@ -56,24 +56,24 @@
         <meta name="twitter:site" content="@">
         <meta property="og:site_name" content="tin">
         <meta property="og:locale" content="cn">
-        <link rel="canonical" href="/posts/2017/gvim-install-youcompleteme.html">
+        <link rel="canonical" href="/posts/2018/redis.html">
         <meta property="og:type" content="article">
-        <meta property="og:title" content="GVIM 安装 YouCompleteMe">
-        <meta property="og:url" content="posts/2017/gvim-install-youcompleteme.html">
-        <meta property="og:description" content="YouCompleteMe 是一款功能强大且性能优秀的 VIM 代码补全插件。它支持绝大部分编程语言的代码补全，同时支持代码搜索跳转，使用 VIM 编程的都离不开它。 然而，由于它功能强大，使它的安装没那么轻松。由于在 Linux 环境下安装 …">
-        <meta property="article:published_time" content="星期五, 三月 10, 2017">
-        <meta name="twitter:title" content="GVIM 安装 YouCompleteMe">
-        <meta name="twitter:description" content="YouCompleteMe 是一款功能强大且性能优秀的 VIM 代码补全插件。它支持绝大部分编程语言的代码补全，同时支持代码搜索跳转，使用 VIM 编程的都离不开它。 然而，由于它功能强大，使它的安装没那么轻松。由于在 Linux 环境下安装 …">
-        <meta name="description" content="YouCompleteMe 是一款功能强大且性能优秀的 VIM 代码补全插件。它支持绝大部分编程语言的代码补全，同时支持代码搜索跳转，使用 VIM 编程的都离不开它。 然而，由于它功能强大，使它的安装没那么轻松。由于在 Linux 环境下安装 …">
+        <meta property="og:title" content="Redis 事务">
+        <meta property="og:url" content="posts/2018/redis.html">
+        <meta property="og:description" content="Redis 事务 Redis 的事务能够保证我们在事务中的一组命令能够按顺序地执行，执行期间 Redis 不会处理其它的客户端的命令请求 以下是 Redis 事务的简单用法: redis&gt; MULTI OK redis&gt; SET …">
+        <meta property="article:published_time" content="星期四, 四月 12, 2018">
+        <meta name="twitter:title" content="Redis 事务">
+        <meta name="twitter:description" content="Redis 事务 Redis 的事务能够保证我们在事务中的一组命令能够按顺序地执行，执行期间 Redis 不会处理其它的客户端的命令请求 以下是 Redis 事务的简单用法: redis&gt; MULTI OK redis&gt; SET …">
+        <meta name="description" content="Redis 事务 Redis 的事务能够保证我们在事务中的一组命令能够按顺序地执行，执行期间 Redis 不会处理其它的客户端的命令请求 以下是 Redis 事务的简单用法: redis&gt; MULTI OK redis&gt; SET …">
         <meta name="twitter:creator" content="@">
         <meta property="og:image" content="/theme/images/logo.png">
         <meta name="twitter:image" content="/theme/images/logo.png">
         <meta property="og:image:type" content="image/png">
         <meta property="og:image:width" content="300">
         <meta property="og:image:height" content="300">
-        <meta property="article:section" content="misc">
-        <meta property="article:tag" content="vim">
-        <meta property="article:tag" content="gvim">
+        <meta property="article:section" content="Redis">
+        <meta property="article:tag" content="redis">
+        <meta property="article:tag" content="python">
         <meta property="article:author" content="midtin">
     </head>
     <body class="post-template nav-closed" itemscope itemtype="http://schema.org/WebPage">
@@ -112,56 +112,108 @@
 <main id="content" class="content" role="main">
     <article class="post" itemscope="" itemtype="http://schema.org/BlogPosting" itemprop="blogPost">
         <header class="post-header">
-            <h1 class="post-title" itemprop="headline">GVIM 安装 YouCompleteMe</h1>
+            <h1 class="post-title" itemprop="headline">Redis 事务</h1>
             <section class="post-meta">
-                <time class="post-date" itemprop="datePublished" datetime="2017YYY-00M-%DD">星期五, 三月 10, 2017</time>
-                on <a href="tag/vim.html">Vim, </a><a href="tag/gvim.html">Gvim</a>            </section>
+                <time class="post-date" itemprop="datePublished" datetime="2018YYY-00M-%DD">星期四, 四月 12, 2018</time>
+                on <a href="tag/redis.html">Redis, </a><a href="tag/python.html">Python</a>            </section>
         </header>
         <section class="post-content">
-            <p><img alt="image" src="/static/youcompleteme.gif"></p>
-<p><a href="https://github.com/Valloric/YouCompleteMe"><strong>YouCompleteMe</strong></a> 是一款功能强大且性能优秀的 VIM 代码补全插件。它支持绝大部分编程语言的代码补全，同时支持代码搜索跳转，使用 VIM 编程的都离不开它。</p>
-<p>然而，由于它功能强大，使它的安装没那么轻松。由于在 Linux 环境下安装 <strong>YouCompleteMe</strong> 相对简单，只需按找文档的<a href="https://github.com/Valloric/YouCompleteMe#installation"><strong>安装指南</strong></a>操作即可，本文仅记录 Windows 环境下的安装过程。</p>
-<blockquote>
-<p>系统：Windows 10 （64bit）</p>
-<p>环境：GVIM 8.0+（32bit），Python3.3+（32bit），CMake（newest 32bit）， Visual Studio 2015 Community（仅安装 C++ 组件）</p>
-</blockquote>
-<p>需要注意的地方是，所有环境工具（除 VSC）需要安装 <strong>32</strong> 位版本。</p>
-<p>原因是，从 <strong>VIM</strong> / <strong>GVIM</strong> （以下统称 VIM）的版本信息（<code>:version</code>）中可以看到</p>
-<div class="highlight"><pre><span></span>VIM - Vi IMproved 8.0 
-...
-+conceal            +keymap             +python/dyn         +visual
-+cryptv             +lambda             +python3/dyn        +visualextra
-+cscope             +langmap            +quickfix           +viminfo
+            <h1>Redis 事务</h1>
+<p>Redis 的事务能够保证我们在事务中的一组命令能够按顺序地执行，执行期间 Redis 不会处理其它的客户端的命令请求</p>
+<p>以下是 Redis 事务的简单用法:</p>
+<div class="highlight"><pre><span></span>redis&gt; MULTI
+OK
+
+redis&gt; SET book-name &quot;Mastering C++ in 21 days&quot;
+QUEUED
+
+redis&gt; GET book-name
+QUEUED
+
+redis&gt; SADD tag &quot;C++&quot; &quot;Programming&quot; &quot;Mastering Series&quot;
+QUEUED
+
+redis&gt; SMEMBERS tag
+QUEUED
+
+redis&gt; EXEC
+1) OK
+2) &quot;Mastering C++ in 21 days&quot;
+3) (integer) 3
+4) 1) &quot;Mastering Series&quot;
+   2) &quot;C++&quot;
+   3) &quot;Programming&quot;
 </pre></div>
 
 
-<p>VIM 对 Python 是动态支持（<code>python/dyn</code>），即当 VIM 需要用到 Python 运行环境时才动态加载。不知是否版本的原因，<strong>64</strong> 位的 VIM 与 <strong>64</strong> 位的 Python3 无法兼容，导致 <code>YouCompleteMe unavailable: requires Vim compiled with Python (2.6+ or 3.3+) support</code> 的错误。</p>
-<p>首先，我们使用 <a href="https://github.com/VundleVim/Vundle.vim"><strong>Vundle.vim</strong></a> 或 Git 下载 <strong>YouComplete</strong> 的版本库（<em>~~由于国情关系~~，建议连上 VPN，否则龟速下载</em>）：</p>
-<div class="highlight"><pre><span></span>git clone https://github.com/Valloric/YouCompleteMe.git
+<p>在客户端发送 <code>MULTI</code> 命令后 Redis 会标记这个客户端（连接），并把这个客户端（连接）接下来发送的命令都放进一个 FIFO 队列，在接收到 <code>EXEC</code> 命令后 Redis 就会开始从队列中逐个取命令并执行。如果接收到的是 <code>DISCARD</code>，Redis 就会清空队列并把客户端（连接）标记回正常状态。</p>
+<p>Redis 事务执行失败一般分两种情况：</p>
+<ol>
+<li>
+<p>在命令进入队列时，Redis 检测到命令的参数不合法，Redis 在接收到 <code>EXEC</code> 直接返回事务已被取消不再执行;</p>
+<div class="highlight"><pre><span></span>redis&gt; set a 1
+OK
+
+redis&gt; multi
+OK
+
+redis&gt; lpop a b
+(error) ERR wrong number of arguments for &#39;lpop&#39; command
+
+redis&gt; exec
+(error) EXECABORT Transaction discarded because of previous errors.
 </pre></div>
 
 
-<p>然后，我们还需下载它的子模块版本库（如果使用 Vundle.vim 安装就不需要再进行此步骤）：</p>
-<div class="highlight"><pre><span></span><span class="nb">cd</span> YouCompleteMe
-git submodule update --init --recursive
+</li>
+<li>
+<p>在事务执行过程中，某命令操作不符合类型的 key，Redis 会继续执行剩下的命令；</p>
+<div class="highlight"><pre><span></span>redis&gt; set a 1
+OK
+
+redis&gt; multi
+OK
+
+redis&gt; lpop a
+QUEUED
+
+redis&gt; exec
+1) (error) WRONGTYPE Operation against a key holding the wrong kind of value
 </pre></div>
 
 
-<p>下载完成后，我们开始进行编译，在 YouComplete 目录下以启动命令行：</p>
-<div class="highlight"><pre><span></span>md ycmd_build
-<span class="nb">cd</span> ycmd_build
+</li>
+</ol>
+<p>Redis 保证了事务中的命令要么全执行要么全不执行，所以 Redis 的事务操作是原子性的。</p>
+<p>网上很多文章因为 Redis 不提供 roll back 就认为 Redis 的事务不是原子性操作，这些都是对原子性操作定义的误解。</p>
+<h1>不支持 roll back</h1>
+<p>在事务执行过程中产生的失败，Redis 并不提供 roll back 处理而是继续执行余下的命令，对于这样处理，Redis 作出了这样的解释：</p>
+<ol>
+<li>Redis 命令的执行失败只有在调用语法错误或者操作了不符合类型的 key 时出现，这些问题都应该在程序开发的期间被发现，并不会引入到生产环境中；</li>
+<li>Redis 很简洁很快，没必要增加 roll back。（roll back 实现复杂而且影响性能）</li>
+</ol>
+<p>很多人可能对于第一点有异议，但第二点却十分具有说服力（KISS）。</p>
+<h1>WATCH</h1>
+<p>我们使用 <code>WATCH</code> 命令对一个或多个 key 进行监察，若被监察的 key 在事务执行前被修改，Redis 会把监察这个 key 的客户端（连接）标记，并不再它们接下来的事务操作，在接收到 <code>EXEC</code> 后返回 nil。</p>
+<p>需要注意的是，使用 <code>EXPIRES</code> 操作被检察的 key 也被视为修改了 key，即使 key 还没过期。</p>
+<div class="highlight"><pre><span></span>redis&gt; set a 1
+OK
 
-cmake -G <span class="s2">&quot;Visual Studio 14&quot;</span> -DPYTHON_LIBRARY<span class="o">=</span>E:<span class="se">\P</span>ython35<span class="se">\l</span>ibs<span class="se">\p</span>ython35.lib -DPYTHON_INCLUDE_DIR<span class="o">=</span>E:<span class="se">\P</span>ython35<span class="se">\i</span>nclude -DUSE_PYTHON2<span class="o">=</span>OFF . ..<span class="se">\t</span>hird_party<span class="se">\y</span>cmd<span class="se">\c</span>pp
+redis&gt; watch a
+OK
+
+redis&gt; expire a 60
+(integer) 1
+
+redis&gt; multi
+OK
+
+redis&gt; get a
+QUEUED
+
+redis&gt; exec
+(nil)
 </pre></div>
-
-
-<p><code>-DPYTHON_LIBRARY</code> 与 <code>-DPYTHON_INCLUDE_DIR</code> 分别指向 Python 安装目录的库，按实际进行修改路径。 </p>
-<p>编译完成后，开始生成项目：</p>
-<div class="highlight"><pre><span></span>cmake --build . --target ycm_core --config Release
-</pre></div>
-
-
-<p>至此，应该已顺利完成 <strong>YouCompleteMe</strong> 的安装，可启动 VIM 进行测试。</p>
         </section>
         <!-- BEGIN LINK -->
         <a rel="nofollow" href="https://affiliate.namecheap.com/?affId=118886" target="_blank">
@@ -182,13 +234,13 @@ cmake -G <span class="s2">&quot;Visual Studio 14&quot;</span> -DPYTHON_LIBRARY<s
             </section>
             <section class="share">
                 <h4>Share this post</h4>
-                <a class="icon-twitter" href="https://twitter.com/share?text=GVIM%20%E5%AE%89%E8%A3%85%20YouCompleteMe%20via%20%40&amp;url=/posts/2017/gvim-install-youcompleteme.html" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                <a class="icon-twitter" href="https://twitter.com/share?text=Redis%20%E4%BA%8B%E5%8A%A1%20via%20%40&amp;url=/posts/2018/redis.html" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
                     <span class="hidden">Twitter</span>
                 </a>
-                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=/posts/2017/gvim-install-youcompleteme.html" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=/posts/2018/redis.html" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
                     <span class="hidden">Facebook</span>
                 </a>
-                <a class="icon-google-plus" href="https://plus.google.com/share?url=/posts/2017/gvim-install-youcompleteme.html" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                <a class="icon-google-plus" href="https://plus.google.com/share?url=/posts/2018/redis.html" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
                     <span class="hidden">Google+</span>
                 </a>
             </section>
@@ -196,21 +248,13 @@ cmake -G <span class="s2">&quot;Visual Studio 14&quot;</span> -DPYTHON_LIBRARY<s
     </article>
 </main>
 <aside class="read-next">
-    <!-- a class="read-next-story" style="background-image: url('')" href="/posts/2017/django-runserver.html" -->
-    <a class="read-next-story" href="/posts/2017/django-runserver.html">
+    <!-- a class="read-next-story prev" style="background-image: url('')" href="/posts/2017/django-runserver.html" -->
+    <a class="read-next-story prev" href="/posts/2017/django-runserver.html">
         <section class="post">
             <h2>Django runserver</h2>
             <!-- p><h2>前言</h2>
 <p>为了方便开发者的本地测试，Django 提供了一个简单的单进程本地服务器， 执行 <code>runserver</code> 命令即可启动该服务器。</p>
 <p>本文将通过探究一下 <code>runserver</code> 的内部实现。参考的 Django 版本为 1.11 …</p></p -->
-        </section>
-    </a>
-    <!-- a class="read-next-story prev" style="background-image: url('')" href="/posts/2014/custom-vagrant-box.html" -->
-    <a class="read-next-story prev" href="/posts/2014/custom-vagrant-box.html">
-        <section class="post">
-            <h2>如何自定义一个使用ssh证书验证登录的VBox?</h2>
-            <!-- p><p>环境：Ubuntu-14.04.1-server-i386<em>，</em>Virtualbox 4.3.16<em>，</em>Vagrant 1.6.5<em>，</em>Win8.1*</p>
-<p>如何创建自定义 …</p></p -->
         </section>
     </a>
 </aside>             <footer class="site-footer clearfix" role="contentinfo" itemscope itemtype="http://schema.org/WPFooter">
