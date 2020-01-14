@@ -115,7 +115,7 @@
             <h1 class="post-title" itemprop="headline">如何自定义一个使用ssh证书验证登录的VBox?</h1>
             <section class="post-meta">
                 <time class="post-date" itemprop="datePublished" datetime="2014YYY-00M-%DD">星期五, 十一月 21, 2014</time>
-                on <a href="tag/vagrant.html">Vagrant, </a><a href="tag/ubuntu.html">Ubuntu</a>            </section>
+                on <a href="/tag/vagrant.html">Vagrant, </a><a href="/tag/ubuntu.html">Ubuntu</a>            </section>
         </header>
         <section class="post-content">
             <p>环境：Ubuntu-14.04.1-server-i386<em>，</em>Virtualbox 4.3.16<em>，</em>Vagrant 1.6.5<em>，</em>Win8.1*</p>
@@ -126,7 +126,7 @@
 <ol>
 <li>
 <p>使用 ssh-keygen 生成 private/public key 文件：</p>
-<div class="highlight"><pre><span></span>ssh-key -t rsa -C &#39;user@email.com&#39;
+<div class="highlight"><pre><span></span><span class="err">ssh-key -t rsa -C &#39;user@email.com&#39;</span>
 </pre></div>
 
 
@@ -136,15 +136,15 @@
 </li>
 <li>
 <p>把<code>~/.ssh/id_rsa.pub</code>改名为<code>authorized_keys</code>，修改一下文件权限作为保护:</p>
-<div class="highlight"><pre><span></span>sudo chmod 400 ~/.ssh/authorized_keys
+<div class="highlight"><pre><span></span><span class="err">sudo chmod 400 ~/.ssh/authorized_keys</span>
 </pre></div>
 
 
 </li>
 <li>
 <p>编辑<code>/etc/ssh/sshd_config</code>， 把<code>AuthorizedKeysFile   %h/.ssh/authorized_keys</code>一行注释去掉，在下面加上：</p>
-<div class="highlight"><pre><span></span>PasswordAuthentication no 
-PermitEmptyPasswords no
+<div class="highlight"><pre><span></span><span class="err">PasswordAuthentication no </span>
+<span class="err">PermitEmptyPasswords no</span>
 </pre></div>
 
 
@@ -162,14 +162,14 @@ vagrant up
 
 
 <p>注意，由于我们使用的是 SSH 证书登录验证，我们<code>vagrant up</code>之前需要在刚生成的<code>Vagrantfile</code>中加入以下设置：</p>
-<div class="highlight"><pre><span></span># vagrant把VirtualBox的端口转发规则改为主机端口2222-&gt;虚拟机端口22，所以这里填2222
-config.ssh.port = 2222
+<div class="highlight"><pre><span></span><span class="o">#</span> <span class="n">vagrant</span><span class="err">把</span><span class="n">VirtualBox</span><span class="err">的端口转发规则改为主机端口</span><span class="mi">2222</span><span class="o">-&gt;</span><span class="err">虚拟机端口</span><span class="mi">22</span><span class="err">，所以这里填</span><span class="mi">2222</span>
+<span class="n">config</span><span class="p">.</span><span class="n">ssh</span><span class="p">.</span><span class="n">port</span> <span class="o">=</span> <span class="mi">2222</span>
 
-# 配置ssh登录使用的用户名
-config.ssh.username = &#39;linuxs_user_name&#39;
+<span class="o">#</span> <span class="err">配置</span><span class="n">ssh</span><span class="err">登录使用的用户名</span>
+<span class="n">config</span><span class="p">.</span><span class="n">ssh</span><span class="p">.</span><span class="n">username</span> <span class="o">=</span> <span class="s1">&#39;linuxs_user_name&#39;</span>
 
-# 配置private_key文件
-config.private_key_path = &#39;your_private_key_path&#39;
+<span class="o">#</span> <span class="err">配置</span><span class="n">private_key</span><span class="err">文件</span>
+<span class="n">config</span><span class="p">.</span><span class="n">private_key_path</span> <span class="o">=</span> <span class="s1">&#39;your_private_key_path&#39;</span>
 </pre></div>
 
 
@@ -262,15 +262,14 @@ Defaults:yourusername   !requiretty
             <h2>Ubuntu Python环境+Vim配置 注意事项</h2>
             <!-- p><p>以前曾经尝试使用CentOS，不过感觉<code>YUM</code>没<code>APT</code>好用，于是选择了Ubuntu作为重新学习Linux的操作系统，毕竟Ubuntu在内地的受支持度还是很高的，至少没被qiang→_→</p>
 <h2></h2>
-<div class="highlight"><pre><span></span>虚拟机：VMware Workstation 9
+<div class="highlight"><pre><span></span><span class="err">虚拟机：</span><span class="n">VMware</span> <span class="n">Workstation</span> <span class="mi">9</span>
 
-系统 …</pre></div></p -->
+<span class="err">系统 …</span></pre></div></p -->
         </section>
     </a>
 </aside>             <footer class="site-footer clearfix" role="contentinfo" itemscope itemtype="http://schema.org/WPFooter">
                 <section class="copyright">
-                    <a itemprop="url" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">
-                        CC Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
+                    <a href="http://www.beian.miit.gov.cn/" target="_blank">粤ICP备18068489号-1</a>
                 </section>
                 <section class="poweredby">
                     Proudly published with
