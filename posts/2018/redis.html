@@ -115,7 +115,7 @@
             <h1 class="post-title" itemprop="headline">Redis 事务</h1>
             <section class="post-meta">
                 <time class="post-date" itemprop="datePublished" datetime="2018YYY-00M-%DD">星期四, 四月 12, 2018</time>
-                on <a href="/tag/redis.html">Redis, </a><a href="/tag/python.html">Python</a>            </section>
+                on <a href="tag/redis.html">Redis, </a><a href="tag/python.html">Python</a>            </section>
         </header>
         <section class="post-content">
             <p>Redis 的事务能够保证我们在事务中的一组命令能够按顺序地执行，执行期间 Redis 不会处理其它的客户端的命令请求</p>
@@ -247,14 +247,6 @@ redis&gt; <span class="nb">exec</span>
     </article>
 </main>
 <aside class="read-next">
-    <!-- a class="read-next-story" style="background-image: url('')" href="/posts/2018/python-37-xin-te-xing-hash-based-pyc.html" -->
-    <a class="read-next-story" href="/posts/2018/python-37-xin-te-xing-hash-based-pyc.html">
-        <section class="post">
-            <h2>Python 3.7 新特性：Hash-based pyc</h2>
-            <!-- p><p>熟悉 Python 的朋友都知道，Python 代码文件在第一次执行之后都会生成一个以 <code>.pyc</code> 为后缀储存 Python 执行的字节码的缓存文件，作用是在源码文件没任何修改并被再次执行时不用重新编译，提高程序启动的效率。</p>
-<p>Python 在生成 pyc 文件时会把对应的源码文件的文件大小和最近修改时间作为元数据存放在 …</p></p -->
-        </section>
-    </a>
     <!-- a class="read-next-story prev" style="background-image: url('')" href="/posts/2017/django-runserver.html" -->
     <a class="read-next-story prev" href="/posts/2017/django-runserver.html">
         <section class="post">
@@ -266,7 +258,8 @@ redis&gt; <span class="nb">exec</span>
     </a>
 </aside>             <footer class="site-footer clearfix" role="contentinfo" itemscope itemtype="http://schema.org/WPFooter">
                 <section class="copyright">
-                    <a href="http://www.beian.miit.gov.cn/" target="_blank">粤ICP备18068489号-1</a>
+                    <a itemprop="url" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">
+                        CC Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
                 </section>
                 <section class="poweredby">
                     Proudly published with
