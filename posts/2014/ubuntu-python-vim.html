@@ -121,15 +121,15 @@
         <section class="post-content">
             <p>以前曾经尝试使用CentOS，不过感觉<code>YUM</code>没<code>APT</code>好用，于是选择了Ubuntu作为重新学习Linux的操作系统，毕竟Ubuntu在内地的受支持度还是很高的，至少没被qiang→_→</p>
 <h2></h2>
-<div class="highlight"><pre><span></span>虚拟机：VMware Workstation 9
+<div class="highlight"><pre><span></span><span class="err">虚拟机：</span><span class="n">VMware</span> <span class="n">Workstation</span> <span class="mi">9</span>
 
-系统：Ubuntu 14.04.1
+<span class="err">系统：</span><span class="n">Ubuntu</span> <span class="mi">14</span><span class="p">.</span><span class="mi">04</span><span class="p">.</span><span class="mi">1</span>
 </pre></div>
 
 
 <h2></h2>
 <p>使用 VMware-Workstation 安装<code>Ubuntu</code>，当如CPU是64位，而安装系统是32位，则会在开机时提示</p>
-<div class="highlight"><pre><span></span>piix4_smbus 0000:00:007.3: Host SMBus controller not enabled
+<div class="highlight"><pre><span></span><span class="err">piix4_smbus 0000:00:007.3: Host SMBus controller not enabled</span>
 </pre></div>
 
 
@@ -139,7 +139,7 @@
 <h3>Python</h3>
 <p>在<code>Ubuntu 14.04</code>中已安装了 <strong>Python2.7.6</strong> 和 <strong>Python3.4.0</strong>，在终端输入<code>python</code>进入Python交互模式默认版本是 <strong>Python2.7.6</strong>，当需要使用 <strong>Python3.x</strong> 时就会很麻烦。</p>
 <p>删除<code>/usr/bin/python</code>，然后重新建立软链接</p>
-<div class="highlight"><pre><span></span># ln -s /usr/bin/python3.4 /usr/bin/python
+<div class="highlight"><pre><span></span><span class="err"># ln -s /usr/bin/python3.4 /usr/bin/python</span>
 </pre></div>
 
 
@@ -153,16 +153,16 @@
 <h2></h2>
 <h3>Vim</h3>
 <p>一般我们选择安装<code>vim-gnome</code></p>
-<div class="highlight"><pre><span></span># apt-get install vim-gnome
+<div class="highlight"><pre><span></span><span class="err"># apt-get install vim-gnome</span>
 </pre></div>
 
 
 <p>这是一个有Gui的Vim，优势在于可使用标签分页。</p>
 <p>如果是想让终端的Vim支持鼠标操作，在<code>~/.vimrc</code>中加入<code>set mouse=a</code>即可。</p>
 <p>在切换到root用户时，如果使用<code>su</code>切换，第一次打开gvim是会提示错误</p>
-<div class="highlight"><pre><span></span>……
-(gvim:2515): GConf-WARNING **: Client failed to connect to the D-BUS daemon
-……
+<div class="highlight"><pre><span></span><span class="err">……</span>
+<span class="err">(gvim:2515): GConf-WARNING **: Client failed to connect to the D-BUS daemon</span>
+<span class="err">……</span>
 </pre></div>
 
 
@@ -219,8 +219,7 @@
     </a>
 </aside>             <footer class="site-footer clearfix" role="contentinfo" itemscope itemtype="http://schema.org/WPFooter">
                 <section class="copyright">
-                    <a itemprop="url" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">
-                        CC Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
+                    <a href="http://www.beian.miit.gov.cn/" target="_blank">粤ICP备18068489号-1</a>
                 </section>
                 <section class="poweredby">
                     Proudly published with

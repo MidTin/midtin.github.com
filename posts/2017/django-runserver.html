@@ -219,7 +219,7 @@
 
 <span class="c1"># django.core.servers.basehttp.py</span>
 
-<span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="n">addr</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">wsgi_handler</span><span class="p">,</span> <span class="n">ipv6</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">threading</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">server_cls</span><span class="o">=</span><span class="n">WSGIServer</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="n">addr</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">wsgi_handler</span><span class="p">,</span> <span class="n">ipv6</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">threading</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">server_cls</span><span class="o">=</span><span class="n">WSGIServer</span><span class="p">):</span>
     <span class="o">...</span>
     <span class="k">if</span> <span class="n">threading</span><span class="p">:</span>
         <span class="n">httpd_cls</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="s1">&#39;WSGIServer&#39;</span><span class="p">),</span> <span class="p">(</span><span class="n">socketserver</span><span class="o">.</span><span class="n">ThreadingMixIn</span><span class="p">,</span> <span class="n">server_cls</span><span class="p">),</span> <span class="p">{})</span>
@@ -316,23 +316,23 @@
 <p><code>_get_response</code> 方法解析请求的路由信息并找到对应的 View，<code>callback</code> 就是对应的 View 函数。</p>
 <p>至此，我们终于知道 HTTP 请求是如何进入到 View 里面的。</p>
 <p>其实 <code>WSGIHandler</code> 就是 WSGI 里描述的 application，当我们使用 uWSGI 等支持 WSGI 协议的服务器运行 Django 时， 提供的 application 就是 <code>WSGIHandler</code>。</p>
-<div class="highlight"><pre><span></span> +-------------+            +-----------------------+
- |             |            |                       |
- |  WSGIServer | ---------&gt; |   WSGIRequestHandler  |
- |             |            |                       |
- +-------------+            +-----------------------+
-                                       |
-                                       |
-                                       |
-                                       |
-                                       |
-                                       |
-                                       v
- +---------------+            +------------------+
- |               |            |                  |
- |  WSGIHandler  | &lt;--------- |   ServerHandler  |
- |               |            |                  |
- +---------------+            +------------------+
+<div class="highlight"><pre><span></span><span class="err"> +-------------+            +-----------------------+</span>
+<span class="err"> |             |            |                       |</span>
+<span class="err"> |  WSGIServer | ---------&gt; |   WSGIRequestHandler  |</span>
+<span class="err"> |             |            |                       |</span>
+<span class="err"> +-------------+            +-----------------------+</span>
+<span class="err">                                       |</span>
+<span class="err">                                       |</span>
+<span class="err">                                       |</span>
+<span class="err">                                       |</span>
+<span class="err">                                       |</span>
+<span class="err">                                       |</span>
+<span class="err">                                       v</span>
+<span class="err"> +---------------+            +------------------+</span>
+<span class="err"> |               |            |                  |</span>
+<span class="err"> |  WSGIHandler  | &lt;--------- |   ServerHandler  |</span>
+<span class="err"> |               |            |                  |</span>
+<span class="err"> +---------------+            +------------------+</span>
 </pre></div>
 
 
@@ -407,8 +407,7 @@ redis&gt; SET book-name <span class="s2">&quot;Mastering …</span></pre></div><
     </a>
 </aside>             <footer class="site-footer clearfix" role="contentinfo" itemscope itemtype="http://schema.org/WPFooter">
                 <section class="copyright">
-                    <a itemprop="url" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">
-                        CC Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
+                    <a href="http://www.beian.miit.gov.cn/" target="_blank">粤ICP备18068489号-1</a>
                 </section>
                 <section class="poweredby">
                     Proudly published with
